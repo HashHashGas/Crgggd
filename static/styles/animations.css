@@ -1,0 +1,51 @@
+/* ------------  ANIMATIONS  AND STATES   ------------- */
+/* ------- NAV BAR  -------- */
+.nav-anchor:hover {
+    color: #f0601cff;
+}
+
+.btn:hover {
+    background-color: #fff;
+    color: #f0601cff;
+}
+
+/* ------ HERO SECTION  -------- */
+.btn-secondary:hover {
+    transform: translate(0rem, -1.2rem);
+    border-radius: 5rem;
+    box-shadow: 0px 1rem 1rem #000;
+}
+
+.btn-primary:hover {
+    transform: translate(0rem, -1.2rem);
+    border-radius: 5rem;
+    box-shadow: 0px 1rem 1rem #000;
+}
+
+
+
+/* --------  SERVICE SECTION   ---------- */
+
+
+.cd-2:hover {
+    transform: translate(10rem, -10rem);
+}
+
+.cd-3:hover, .cd-4:hover {
+    transform: translate(100rem, 0px);
+}
+
+/* ---------- FEATURE SECTION   ---------- */
+
+.card-link:hover {
+    color: #f0601cff;
+    transform: scale(1.10) translate(0px, -5px);
+}
+
+/* -------  FOOTER SECTION  -------- */
+.footer-anchor:hover {
+    color: #f0601cff;
+}
+
+
+

@@ -1,0 +1,171 @@
+/* ---------- RESPONSIVE DESIGN AND BREAK POINTS ------------- */
+
+@media (max-width: 118.75rem) {
+    /* ----width: 1900px ----- */
+    html {
+        font-size: 50%;
+    }
+}
+
+@media (max-width: 93.75rem) {
+    /* ----- width: ------ */
+    html {
+        font-size: 43.75%;
+    }
+
+    .nav-list {
+        gap: 3rem;
+    }
+}
+
+@media (max-width:75.7rem) {
+    html {
+        font-size: 37.5%;
+    }
+
+    br {
+        display: none;
+    }
+
+    .nav-list {
+        font-size: 0.5rem;
+    }
+
+    .nav-inner {
+        gap: 6rem;
+    }
+}
+
+@media (max-width: 62.7rem) {
+    html {
+        font-size: 37.5%;
+    }
+
+
+    h1 {
+        font-size: 9rem;
+    }
+
+    br {
+        display: none;
+
+    }
+
+    .hero-section {
+        align-items: center;
+    }
+
+    .hero-header {
+        align-items: center;
+        text-align: center;
+    }
+
+    .learn-more {
+        align-self: center;
+    }
+
+    .about-services {
+        grid-template-columns: 1fr;
+        row-gap: 3rem;
+    }
+
+    .features-section {
+        grid-template-columns:1fr;
+        row-gap: 3rem;
+    }
+
+    .feature-card:hover {
+        transform: scale(1.05);
+        margin: 2rem;
+    }
+    
+}
+
+
+@media (max-width:43.75rem) {
+    .footer-anchor {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    br {
+        display: none;
+    }
+
+    .features-section {
+        grid-template-columns: 1fr;
+        row-gap: 3rem;
+    }
+
+    .c3 {
+        position: relative;
+        left: 0;
+    }
+
+    .hamburger-icon {
+        display: inline-block;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 0;
+        right: 0;
+        /* display: flex; */
+        flex-direction: column;
+        width: 100%;
+        background-color: #131c45ff;
+        padding: 3rem;
+        gap: 2rem;
+        display: none;
+    }
+
+
+    .nav-list {
+        display: flex;
+        gap: 4rem;
+        flex-direction: column;
+    }
+
+    .last-footer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .q-list {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    .footer-contact {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        width: 100%;
+        font-size: 2.5rem;
+        
+    }
+
+    .contact-items {
+        text-align: center;
+    }
+
+    .contact-items h4 {
+        font-size: 3rem;
+    }
+
+    .social-links a {
+        font-size: 3rem;
+        margin-right: 2rem;
+    }
+
+    .footer-hero p {
+        width: 95%;
+    }
+
+}
