@@ -1,183 +1,905 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/static/images/company_l1ogo_white.png">
-    <link rel="stylesheet" href="/static/app.css">
-    <link rel="stylesheet" href="/static/styles/animations.css">
-    <link rel="stylesheet" href="/static/styles/media.css">
     <title>CargoDrive (Карго Драйв) — грузовые перевозки по Европе</title>
+    <meta name="description" content="CargoDrive — грузовые перевозки, доставка документов и проверка маршрутов по Европе. Быстрая связь с оператором прямо на сайте.">
+    <meta name="theme-color" content="#0b5cff">
+    <link rel="icon" href="/static/images/company_l1ogo_white.png">
+
+    <style>
+        :root{
+            --bg: #f4f8ff;
+            --bg-soft: #eef4ff;
+            --card: rgba(255,255,255,0.88);
+            --card-strong: #ffffff;
+            --text: #10213b;
+            --muted: #58708f;
+            --line: rgba(16,33,59,0.08);
+            --blue: #0b5cff;
+            --blue-dark: #083ea8;
+            --blue-soft: #dce8ff;
+            --accent: #2f7fff;
+            --shadow: 0 18px 60px rgba(23, 72, 166, 0.14);
+            --radius: 22px;
+        }
+
+        *{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html{
+            scroll-behavior: smooth;
+        }
+
+        body{
+            font-family: Arial, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(11,92,255,0.10), transparent 28%),
+                radial-gradient(circle at top right, rgba(47,127,255,0.10), transparent 24%),
+                linear-gradient(180deg, #f8fbff 0%, #eff5ff 100%);
+            color: var(--text);
+        }
+
+        a{
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container{
+            width: min(1200px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .top-strip{
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(8, 21, 45, 0.85);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .top-strip-inner{
+            width: min(1200px, calc(100% - 32px));
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 10px 0;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .top-strip-badge{
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #dfeaff;
+            font-weight: 600;
+        }
+
+        .top-strip-btn{
+            background: linear-gradient(135deg, var(--blue), var(--accent));
+            color: #fff;
+            padding: 11px 18px;
+            border-radius: 999px;
+            font-weight: 700;
+            white-space: nowrap;
+            box-shadow: 0 10px 25px rgba(11,92,255,0.28);
+        }
+
+        .header-wrap{
+            padding: 18px 0 0;
+        }
+
+        .nav-bar{
+            position: sticky;
+            top: 56px;
+            z-index: 999;
+        }
+
+        .nav-inner{
+            background: rgba(255,255,255,0.78);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(16,33,59,0.07);
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 14px 18px;
+        }
+
+        .logo{
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .logo img{
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: #0b5cff;
+            padding: 4px;
+        }
+
+        .logo-text{
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .logo-span{
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .logo-sub{
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .nav-links{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-list{
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        .nav-anchor{
+            font-size: 15px;
+            color: var(--text);
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .nav-anchor:hover{
+            color: var(--blue);
+        }
+
+        .nav-main-btn{
+            background: linear-gradient(135deg, var(--blue), var(--accent));
+            color: #fff;
+            padding: 13px 18px;
+            border-radius: 14px;
+            font-weight: 700;
+            box-shadow: 0 12px 24px rgba(11,92,255,0.24);
+            white-space: nowrap;
+        }
+
+        .hero{
+            margin-top: 18px;
+            padding: 36px;
+            border-radius: 30px;
+            background:
+                linear-gradient(115deg, rgba(255,255,255,0.94) 0%, rgba(235,243,255,0.92) 52%, rgba(223,234,255,0.82) 100%);
+            border: 1px solid rgba(16,33,59,0.07);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero::before{
+            content: "";
+            position: absolute;
+            inset: auto -60px -120px auto;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(11,92,255,0.18), transparent 68%);
+            pointer-events: none;
+        }
+
+        .hero-grid{
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 28px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-kicker{
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: var(--blue-soft);
+            color: var(--blue-dark);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero h1{
+            font-size: clamp(40px, 6vw, 76px);
+            line-height: 0.98;
+            letter-spacing: -2px;
+            margin-bottom: 18px;
+            color: var(--text);
+        }
+
+        .hero-p{
+            font-size: 20px;
+            line-height: 1.55;
+            color: var(--muted);
+            max-width: 760px;
+            margin-bottom: 22px;
+        }
+
+        .hero-cta{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .btn-primary{
+            background: linear-gradient(135deg, var(--blue), var(--accent));
+            color: #fff;
+            padding: 15px 22px;
+            border-radius: 16px;
+            font-weight: 800;
+            box-shadow: 0 16px 30px rgba(11,92,255,0.24);
+        }
+
+        .btn-secondary{
+            background: #fff;
+            color: var(--text);
+            border: 1px solid rgba(16,33,59,0.10);
+            padding: 15px 22px;
+            border-radius: 16px;
+            font-weight: 800;
+        }
+
+        .hero-note{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .hero-card{
+            background: rgba(255,255,255,0.88);
+            border: 1px solid rgba(16,33,59,0.08);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: 24px;
+        }
+
+        .hero-card-title{
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .hero-card-text{
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--muted);
+            margin-bottom: 18px;
+        }
+
+        .quick-points{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .quick-point{
+            padding: 14px;
+            border-radius: 18px;
+            background: #f6f9ff;
+            border: 1px solid rgba(16,33,59,0.06);
+        }
+
+        .quick-point strong{
+            display: block;
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .quick-point span{
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.45;
+        }
+
+        .services-strip{
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .service-chip{
+            background: rgba(255,255,255,0.88);
+            border: 1px solid rgba(16,33,59,0.08);
+            border-radius: 20px;
+            padding: 18px 16px;
+            box-shadow: var(--shadow);
+            min-height: 120px;
+        }
+
+        .service-chip img{
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            margin-bottom: 12px;
+        }
+
+        .service-chip p{
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+
+        .section{
+            padding: 74px 0 0;
+        }
+
+        .section-head{
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 30px;
+            align-items: start;
+            margin-bottom: 28px;
+        }
+
+        .eyebrow{
+            color: var(--blue);
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+
+        .section-title{
+            font-size: clamp(32px, 4vw, 52px);
+            line-height: 1.04;
+            letter-spacing: -1px;
+            color: var(--text);
+        }
+
+        .section-text{
+            font-size: 21px;
+            line-height: 1.55;
+            color: var(--muted);
+        }
+
+        .feature-grid{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature-card{
+            background: rgba(255,255,255,0.92);
+            border: 1px solid rgba(16,33,59,0.08);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: 26px;
+        }
+
+        .feature-card img{
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+            margin-bottom: 18px;
+        }
+
+        .feature-card h3{
+            font-size: 23px;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .feature-card p{
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .card-link{
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--blue);
+            font-weight: 800;
+        }
+
+        .highlight-band{
+            margin-top: 20px;
+            background: linear-gradient(135deg, #0b5cff, #2f7fff);
+            color: #fff;
+            border-radius: 24px;
+            padding: 22px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            box-shadow: 0 18px 35px rgba(11,92,255,0.22);
+        }
+
+        .highlight-band strong{
+            font-size: 19px;
+            line-height: 1.5;
+        }
+
+        .highlight-band a{
+            white-space: nowrap;
+            background: #fff;
+            color: var(--blue-dark);
+            padding: 14px 18px;
+            border-radius: 14px;
+            font-weight: 800;
+        }
+
+        .contact-panel{
+            margin-top: 28px;
+            background: linear-gradient(135deg, #ffffff, #edf4ff);
+            border: 1px solid rgba(16,33,59,0.08);
+            border-radius: 26px;
+            box-shadow: var(--shadow);
+            padding: 28px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .contact-panel h3{
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .contact-panel p{
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.65;
+        }
+
+        .contact-actions{
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .contact-actions a{
+            padding: 15px 18px;
+            border-radius: 16px;
+            font-weight: 800;
+        }
+
+        .contact-main{
+            background: linear-gradient(135deg, var(--blue), var(--accent));
+            color: #fff;
+        }
+
+        .contact-soft{
+            background: #fff;
+            color: var(--text);
+            border: 1px solid rgba(16,33,59,0.10);
+        }
+
+        .footer{
+            margin-top: 74px;
+            padding: 34px 0 42px;
+        }
+
+        .footer-box{
+            background: rgba(255,255,255,0.82);
+            border: 1px solid rgba(16,33,59,0.08);
+            border-radius: 28px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+        }
+
+        .footer-top{
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 0.9fr;
+            gap: 26px;
+            margin-bottom: 26px;
+        }
+
+        .footer h4{
+            font-size: 20px;
+            margin-bottom: 14px;
+        }
+
+        .footer p, .footer li, .footer a{
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 1.8;
+            list-style: none;
+        }
+
+        .footer ul{
+            list-style: none;
+        }
+
+        .footer-bottom{
+            padding-top: 18px;
+            border-top: 1px solid rgba(16,33,59,0.08);
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .chat-float{
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .chat-tip{
+            max-width: 300px;
+            background: rgba(255,255,255,0.96);
+            border: 1px solid rgba(16,33,59,0.08);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+            padding: 14px 16px;
+        }
+
+        .chat-tip strong{
+            display: block;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .chat-tip span{
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .chat-main-btn{
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--blue), var(--accent));
+            color: #fff;
+            padding: 16px 20px;
+            border-radius: 999px;
+            font-weight: 800;
+            box-shadow: 0 18px 35px rgba(11,92,255,0.28);
+        }
+
+        .chat-dot{
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #71ff9f;
+            box-shadow: 0 0 0 6px rgba(113,255,159,0.18);
+        }
+
+        .mobile-chat-bar{
+            display: none;
+        }
+
+        @media (max-width: 1100px){
+            .hero-grid,
+            .section-head,
+            .footer-top,
+            .contact-panel{
+                grid-template-columns: 1fr;
+            }
+
+            .services-strip,
+            .feature-grid{
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-actions{
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 820px){
+            .nav-inner{
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links{
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-list{
+                gap: 14px;
+            }
+
+            .hero{
+                padding: 24px;
+            }
+
+            .hero-p,
+            .section-text{
+                font-size: 17px;
+            }
+
+            .services-strip,
+            .feature-grid{
+                grid-template-columns: 1fr;
+            }
+
+            .top-strip-inner{
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .chat-float{
+                right: 14px;
+                bottom: 14px;
+            }
+
+            .chat-tip{
+                display: none;
+            }
+
+            .mobile-chat-bar{
+                display: flex;
+                position: sticky;
+                bottom: 0;
+                z-index: 1100;
+                background: rgba(255,255,255,0.92);
+                backdrop-filter: blur(16px);
+                border-top: 1px solid rgba(16,33,59,0.08);
+                padding: 12px 14px;
+                margin-top: 24px;
+            }
+
+            .mobile-chat-bar a{
+                width: 100%;
+                text-align: center;
+                padding: 16px 18px;
+                border-radius: 16px;
+                font-weight: 800;
+                background: linear-gradient(135deg, var(--blue), var(--accent));
+                color: #fff;
+                box-shadow: 0 16px 30px rgba(11,92,255,0.20);
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <div class="top-strip">
+        <div class="top-strip-inner">
+            <div class="top-strip-badge">
+                <span>●</span>
+                <span>Оператор онлайн • Поможем быстро проверить маршрут и доступность города</span>
+            </div>
+            <a href="#live-chat" class="top-strip-btn">Открыть чат с оператором</a>
+        </div>
+    </div>
+
     <div class="container">
-        <header class="header" id="home">
+        <div class="header-wrap">
             <div class="nav-bar">
                 <div class="nav-inner">
                     <div class="logo">
-                        <img src="/static/images/company_logo_white.svg.2025_04_28_19_09_29.0.svg" alt="CargoDrive logo"
-                            class="logo-comp">
-                        <span class="logo-span">CargoDrive</span>
+                        <img src="/static/images/company_l1ogo_white.png" alt="CargoDrive logo">
+                        <div class="logo-text">
+                            <span class="logo-span">CargoDrive</span>
+                            <span class="logo-sub">Перевозки по Европе</span>
+                        </div>
                     </div>
-                    <button class="hamburger-icon menu-icon">
-                        <img src="/static/images/menu.svg" alt="menu">
-                    </button>
+
                     <div class="nav-links">
                         <ul class="nav-list">
-                            <button class="close-icon menu-icon">
-                                <img src="/static/images/close.svg" alt="close menu">
-                            </button>
                             <li><a class="nav-anchor" href="#home">Главная</a></li>
                             <li><a class="nav-anchor" href="#about">О сервисе</a></li>
                             <li><a class="nav-anchor" href="#services">Услуги</a></li>
                             <li><a class="nav-anchor" href="#advantages">Преимущества</a></li>
                             <li><a class="nav-anchor" href="#contacts">Контакты</a></li>
                         </ul>
-                        <form>
-                            <a href="https://t.me/Devani_i" class="btn">Связаться с оператором</a>
-                        </form>
+
+                        <a href="#live-chat" class="nav-main-btn">Чат с оператором</a>
                     </div>
                 </div>
             </div>
 
-            <div class="hero-section">
-                <div class="hero-header">
-                    <h1>Грузовые перевозки <br>по Европе</h1>
-                    <p class="hero-p">
-                        CargoDrive (Карго Драйв) помогает организовать грузовые перевозки, доставку документов
-                        и отправку грузов по Европе. Чтобы уточнить, доступна ли перевозка из нужного вам города
-                        или в нужное направление, нажмите кнопку связи с оператором.
-                    </p>
-                    <ul class="learn-more">
-                        <li><a class="btn1 btn-secondary" href="#services">Наши услуги</a></li>
-                        <li><a class="btn1 btn-primary" href="https://t.me/Devani_i">Узнать маршрут</a></li>
-                    </ul>
+            <section class="hero" id="home">
+                <div class="hero-grid">
+                    <div>
+                        <div class="hero-kicker">CargoDrive • Живой оператор на сайте</div>
+
+                        <h1>Грузовые перевозки<br>по Европе</h1>
+
+                        <p class="hero-p">
+                            CargoDrive помогает организовать грузовые перевозки, доставку документов
+                            и отправку грузов по Европе. Если вам нужно быстро узнать, доступна ли
+                            перевозка из нужного города или в нужное направление — просто напишите
+                            в чат на сайте, и оператор ответит вживую.
+                        </p>
+
+                        <div class="hero-cta">
+                            <a href="#services" class="btn-primary">Наши услуги</a>
+                            <a href="#live-chat" class="btn-secondary">Узнать маршрут в чате</a>
+                        </div>
+
+                        <div class="hero-note">
+                            <span>⏱ Обычно отвечаем быстро</span>
+                        </div>
+                    </div>
+
+                    <div class="hero-card">
+                        <div class="hero-card-title">Быстрый старт</div>
+                        <div class="hero-card-text">
+                            Напишите оператору прямо на сайте и уточните:
+                        </div>
+
+                        <div class="quick-points">
+                            <div class="quick-point">
+                                <strong>Откуда / куда</strong>
+                                <span>Проверим направление и маршрут</span>
+                            </div>
+                            <div class="quick-point">
+                                <strong>Тип груза</strong>
+                                <span>Подскажем по документам и отправке</span>
+                            </div>
+                            <div class="quick-point">
+                                <strong>Сроки</strong>
+                                <span>Уточним доступность и детали</span>
+                            </div>
+                            <div class="quick-point">
+                                <strong>Связь</strong>
+                                <span>Живой чат с оператором прямо на сайте</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="services-section">
-                    <div class="service-card service-secondary">
-                        <img src="/static/svgs/ware-house.svg" alt="грузы" class="card-item cd-1">
-                        <p>Грузовые <br>перевозки</p>
+                <div class="services-strip">
+                    <div class="service-chip">
+                        <img src="/static/svgs/ware-house.svg" alt="Грузы">
+                        <p>Грузовые<br>перевозки</p>
                     </div>
-                    <div class="service-card">
-                        <img src="/static/svgs/airplane.svg" alt="документы" class="card-item cd-2">
-                        <p>Доставка <br>документов</p>
+                    <div class="service-chip">
+                        <img src="/static/svgs/airplane.svg" alt="Документы">
+                        <p>Доставка<br>документов</p>
                     </div>
-                    <div class="service-card">
-                        <img src="/static/svgs/ship.svg" alt="европа" class="card-item cd-3">
-                        <p>Маршруты по <br>Европе</p>
+                    <div class="service-chip">
+                        <img src="/static/svgs/ship.svg" alt="Маршруты">
+                        <p>Маршруты<br>по Европе</p>
                     </div>
-                    <div class="service-card">
-                        <img src="/static/svgs/delivery-truck.svg" alt="оператор" class="card-item cd-4">
-                        <p>Проверка города <br>через оператора</p>
+                    <div class="service-chip">
+                        <img src="/static/svgs/delivery-truck.svg" alt="Оператор">
+                        <p>Проверка города<br>через оператора</p>
                     </div>
                 </div>
-            </div>
-        </header>
+            </section>
+        </div>
 
         <section class="section">
-            <main class="main-section">
-                <div class="about-services">
-                    <div class="introduction">
-                        <p id="about">CargoDrive (Карго Драйв)</p>
-                        <h2>Перевозки грузов и документов <br>с удобной связью через оператора</h2>
-                    </div>
-
-                    <div class="about-us">
-                        <p>
-                            Мы работаем по Европе и помогаем быстро уточнить возможность отправки из конкретного
-                            города или в нужное направление. Если вам нужно узнать, доступна ли доставка по вашему
-                            маршруту, достаточно написать оператору — он подскажет детали и доступность перевозки.
-                        </p>
-                    </div>
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow" id="about">CargoDrive (Карго Драйв)</div>
+                    <h2 class="section-title">Перевозки грузов и документов<br>с удобной связью через оператора</h2>
                 </div>
 
-                <div class="features-section" id="services">
-                    <div class="feature-card">
-                        <img src="/static/svgs/airplane1.svg" alt="грузовые перевозки" class="f-item">
-                        <h3 class="f-heading">Грузовые перевозки</h3>
-                        <p>
-                            Организуем перевозку грузов по европейским направлениям. Если вам нужно уточнить
-                            конкретный город отправления или получения, свяжитесь с оператором.
-                        </p>
-                        <a class="card-link" href="https://t.me/Devani_i">Связаться</a>
-                    </div>
+                <div class="section-text">
+                    Мы работаем по Европе и помогаем быстро уточнить возможность отправки
+                    из конкретного города или в нужное направление. Если вам нужно узнать,
+                    доступна ли доставка по вашему маршруту, достаточно написать оператору
+                    в живой чат на сайте.
+                </div>
+            </div>
 
-                    <div class="feature-card">
-                        <img src="/static/svgs/ship1.svg" alt="доставка документов" class="f-item">
-                        <h3 class="f-heading">Доставка документов</h3>
-                        <p>
-                            Помогаем с отправкой документов и других важных отправлений. Для уточнения маршрута,
-                            сроков и доступности направления напишите оператору напрямую.
-                        </p>
-                        <a class="card-link" href="https://t.me/Devani_i">Связаться</a>
-                    </div>
-
-                    <div class="feature-card c3">
-                        <img src="/static/svgs/truck1.svg" alt="проверка маршрута" class="f-item">
-                        <h3 class="f-heading">Проверка маршрута</h3>
-                        <p>
-                            Не все направления одинаковы, поэтому самый быстрый способ узнать, работаем ли мы
-                            с вашим городом — нажать на кнопку связи и написать оператору.
-                        </p>
-                        <a class="card-link" href="https://t.me/Devani_i">Узнать у оператора</a>
-                    </div>
+            <div class="feature-grid" id="services">
+                <div class="feature-card">
+                    <img src="/static/svgs/airplane1.svg" alt="Грузовые перевозки">
+                    <h3>Грузовые перевозки</h3>
+                    <p>
+                        Организуем перевозку грузов по европейским направлениям.
+                        Если нужно уточнить конкретный город отправления или получения —
+                        просто откройте чат с оператором.
+                    </p>
+                    <a class="card-link" href="#live-chat">Открыть чат →</a>
                 </div>
 
-                <span class="feature-span" id="advantages">
-                    Быстрая связь с оператором и понятная логика оформления
-                    <span class="inner-span">Уточнить свой маршрут</span>
-                </span>
-            </main>
+                <div class="feature-card">
+                    <img src="/static/svgs/ship1.svg" alt="Доставка документов">
+                    <h3>Доставка документов</h3>
+                    <p>
+                        Помогаем с отправкой документов и других важных отправлений.
+                        В чате можно быстро уточнить маршрут, сроки и доступность направления.
+                    </p>
+                    <a class="card-link" href="#live-chat">Написать оператору →</a>
+                </div>
+
+                <div class="feature-card">
+                    <img src="/static/svgs/truck1.svg" alt="Проверка маршрута">
+                    <h3>Проверка маршрута</h3>
+                    <p>
+                        Не все направления одинаковы. Самый быстрый способ узнать,
+                        работает ли нужный маршрут — написать оператору прямо на сайте.
+                    </p>
+                    <a class="card-link" href="#live-chat">Уточнить маршрут →</a>
+                </div>
+            </div>
+
+            <div class="highlight-band" id="advantages">
+                <strong>Быстрая связь, понятная логика и живой оператор прямо на сайте</strong>
+                <a href="#live-chat">Открыть чат</a>
+            </div>
+
+            <div class="contact-panel" id="contacts">
+                <div>
+                    <h3>Нужна помощь с маршрутом?</h3>
+                    <p>
+                        Напишите оператору прямо сейчас: можно уточнить город, направление,
+                        тип груза, документы и доступность перевозки. Чат на сайте находится
+                        внизу справа и работает как живая поддержка.
+                    </p>
+                </div>
+
+                <div class="contact-actions">
+                    <a class="contact-main" href="#live-chat">Открыть чат</a>
+                    <a class="contact-soft" href="https://t.me/Devani_i" target="_blank">Telegram</a>
+                </div>
+            </div>
         </section>
 
         <footer class="footer">
-            <div class="inner-footer">
-                <div class="footer-hero">
-                    <h4>Почему выбирают нас</h4>
-                    <p>
-                        CargoDrive — это удобный формат связи для тех, кому нужно быстро уточнить возможность
-                        перевозки. Мы работаем по Европе, перевозим грузы и документы, а информацию по конкретному
-                        городу или направлению можно получить напрямую у оператора в Telegram.
-                    </p>
-                </div>
+            <div class="footer-box">
+                <div class="footer-top">
+                    <div>
+                        <h4>Почему выбирают нас</h4>
+                        <p>
+                            CargoDrive — это удобный формат связи для тех, кому нужно быстро
+                            уточнить возможность перевозки. Мы работаем по Европе, перевозим
+                            грузы и документы, а информацию по конкретному городу или направлению
+                            можно получить через живой чат на сайте или в Telegram.
+                        </p>
+                    </div>
 
-                <div class="last-footer">
-                    <div class="footer-services">
-                        <h4 class="q-link">Навигация</h4>
-                        <ul class="q-list">
-                            <li><a class="footer-anchor" href="#home">Главная</a></li>
-                            <li><a class="footer-anchor" href="#about">О сервисе</a></li>
-                            <li><a class="footer-anchor" href="#services">Услуги</a></li>
-                            <li><a class="footer-anchor" href="#advantages">Преимущества</a></li>
-                            <li><a class="footer-anchor" href="#contacts">Контакты</a></li>
+                    <div>
+                        <h4>Навигация</h4>
+                        <ul>
+                            <li><a href="#home">Главная</a></li>
+                            <li><a href="#about">О сервисе</a></li>
+                            <li><a href="#services">Услуги</a></li>
+                            <li><a href="#advantages">Преимущества</a></li>
+                            <li><a href="#contacts">Контакты</a></li>
                         </ul>
                     </div>
 
-                    <div class="footer-services">
-                        <h4 class="q-link">Основные услуги</h4>
-                        <ul class="q-list">
-                            <li><a class="footer-anchor" href="https://t.me/Devani_i">Грузовые перевозки</a></li>
-                            <li><a class="footer-anchor" href="https://t.me/Devani_i">Доставка документов</a></li>
-                            <li><a class="footer-anchor" href="https://t.me/Devani_i">Маршруты по Европе</a></li>
-                            <li><a class="footer-anchor" href="https://t.me/Devani_i">Проверка города</a></li>
-                            <li><a class="footer-anchor" href="https://t.me/Devani_i">Связь с оператором</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="footer-contact">
-                        <h4 class="contact-items" id="contacts">Контакты</h4>
-                        <p class="contact-items">📍 Работаем по Европе</p>
-                        <p class="contact-items">📦 Перевозим грузы и документы</p>
-                        <p class="contact-items">✉️ Telegram: @Devani_i</p>
-
-                        <div class="social-links">
-                            <a href="https://t.me/Devani_i">Telegram</a>
-                            <a href="https://t.me/Devani_i">Оператор</a>
-                            <a href="https://t.me/Devani_i">Связаться</a>
-                        </div>
+                    <div>
+                        <h4>Контакты</h4>
+                        <p>📍 Работаем по Европе</p>
+                        <p>📦 Перевозим грузы и документы</p>
+                        <p>✉️ Telegram: @Devani_i</p>
                     </div>
                 </div>
 
@@ -186,9 +908,53 @@
                 </div>
             </div>
         </footer>
+
+        <div class="mobile-chat-bar">
+            <a href="#live-chat">Открыть чат с оператором</a>
+        </div>
+    </div>
+
+    <div class="chat-float" id="live-chat">
+        <div class="chat-tip">
+            <strong>Оператор онлайн</strong>
+            <span>Нажмите на кнопку ниже, чтобы открыть живой чат прямо на сайте.</span>
+        </div>
+        <a href="javascript:void(0)" class="chat-main-btn">
+            <span class="chat-dot"></span>
+            <span>Чат с оператором</span>
+        </a>
     </div>
 
     <script src="/static/scripts/main.js"></script>
-</body>
 
+   <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/69b0a9e3ddd7fc1c34856875/1jjd1f821';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+    <script>
+        document.querySelectorAll('a[href="#live-chat"]').forEach(function(link){
+            link.addEventListener('click', function(e){
+                e.preventDefault();
+                var chatButton = document.querySelector('.tawk-min-container, .tawk-button, iframe[title*="chat"], iframe[title*="Chat"]');
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
+                setTimeout(function(){
+                    if (chatButton && typeof chatButton.click === 'function') {
+                        chatButton.click();
+                    }
+                }, 700);
+            });
+        });
+    </script>
+</body>
 </html>
