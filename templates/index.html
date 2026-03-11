@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CargoDrive (Карго Драйв) — грузовые перевозки по Европе</title>
-    <meta name="description" content="CargoDrive — грузовые перевозки, доставка документов и проверка маршрутов по Европе. Быстрая связь с оператором прямо на сайте.">
-    <meta name="theme-color" content="#0b5cff">
+    <title>CargoDrive (Карго Драйв) — перевозки, документы и маршруты по Европе</title>
+    <meta name="description" content="CargoDrive — перевозки по Европе, доставка посылок, вещей и документов. Уточните маршрут, сроки и детали через живой чат с оператором на сайте.">
+    <meta name="theme-color" content="#2b6fff">
     <link rel="icon" href="/static/images/company_l1ogo_white.png">
 
     <style>
         :root{
-            --bg: #f4f8ff;
-            --bg-soft: #eef4ff;
-            --card: rgba(255,255,255,0.88);
-            --card-strong: #ffffff;
-            --text: #10213b;
-            --muted: #58708f;
-            --line: rgba(16,33,59,0.08);
-            --blue: #0b5cff;
-            --blue-dark: #083ea8;
-            --blue-soft: #dce8ff;
-            --accent: #2f7fff;
-            --shadow: 0 18px 60px rgba(23, 72, 166, 0.14);
-            --radius: 22px;
+            --bg: #f6f9ff;
+            --bg-soft: #edf4ff;
+            --surface: rgba(255,255,255,0.84);
+            --surface-strong: #ffffff;
+            --text: #132746;
+            --muted: #617a99;
+            --line: rgba(19,39,70,0.08);
+            --line-strong: rgba(19,39,70,0.12);
+            --blue: #2b6fff;
+            --blue-dark: #1749b8;
+            --blue-soft: #dbe8ff;
+            --blue-soft-2: #edf4ff;
+            --shadow: 0 18px 60px rgba(42, 86, 180, 0.12);
+            --shadow-soft: 0 12px 30px rgba(42, 86, 180, 0.10);
+            --radius-xl: 30px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 14px;
+            --container: min(1200px, calc(100% - 32px));
         }
 
         *{
@@ -37,83 +43,126 @@
 
         body{
             font-family: Arial, sans-serif;
-            background:
-                radial-gradient(circle at top left, rgba(11,92,255,0.10), transparent 28%),
-                radial-gradient(circle at top right, rgba(47,127,255,0.10), transparent 24%),
-                linear-gradient(180deg, #f8fbff 0%, #eff5ff 100%);
             color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(43,111,255,0.11), transparent 26%),
+                radial-gradient(circle at top right, rgba(43,111,255,0.07), transparent 24%),
+                linear-gradient(180deg, #f9fbff 0%, #eef5ff 100%);
+        }
+
+        img{
+            max-width: 100%;
+            display: block;
         }
 
         a{
-            text-decoration: none;
             color: inherit;
+            text-decoration: none;
+        }
+
+        button{
+            font: inherit;
+            border: none;
+            background: none;
+            cursor: pointer;
         }
 
         .container{
-            width: min(1200px, calc(100% - 32px));
+            width: var(--container);
             margin: 0 auto;
         }
 
         .top-strip{
             position: sticky;
             top: 0;
-            z-index: 1000;
-            background: rgba(8, 21, 45, 0.85);
-            backdrop-filter: blur(18px);
+            z-index: 1200;
+            background: rgba(17, 31, 58, 0.86);
+            backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
         .top-strip-inner{
-            width: min(1200px, calc(100% - 32px));
+            width: var(--container);
             margin: 0 auto;
+            min-height: 58px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
+            gap: 14px;
             padding: 10px 0;
-            color: #fff;
-            font-size: 14px;
         }
 
-        .top-strip-badge{
+        .top-strip-text{
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            color: #dfeaff;
-            font-weight: 600;
+            gap: 10px;
+            color: #edf4ff;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.45;
         }
 
-        .top-strip-btn{
-            background: linear-gradient(135deg, var(--blue), var(--accent));
-            color: #fff;
-            padding: 11px 18px;
+        .status-dot{
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #7cff9f;
+            box-shadow: 0 0 0 6px rgba(124,255,159,0.16);
+            flex: 0 0 auto;
+        }
+
+        .top-strip-actions{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .mini-link{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 14px;
             border-radius: 999px;
+            background: rgba(255,255,255,0.10);
+            color: #fff;
+            font-size: 13px;
             font-weight: 700;
+            transition: 0.2s ease;
             white-space: nowrap;
-            box-shadow: 0 10px 25px rgba(11,92,255,0.28);
+        }
+
+        .mini-link:hover{
+            background: rgba(255,255,255,0.16);
+        }
+
+        .mini-link.primary{
+            background: linear-gradient(135deg, var(--blue), #4f8dff);
+            box-shadow: 0 10px 24px rgba(43,111,255,0.30);
         }
 
         .header-wrap{
             padding: 18px 0 0;
         }
 
-        .nav-bar{
+        .nav-shell{
             position: sticky;
-            top: 56px;
-            z-index: 999;
+            top: 70px;
+            z-index: 1100;
         }
 
-        .nav-inner{
-            background: rgba(255,255,255,0.78);
-            backdrop-filter: blur(18px);
-            border: 1px solid rgba(16,33,59,0.07);
-            border-radius: 22px;
-            box-shadow: var(--shadow);
+        .nav-bar{
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 24px;
             padding: 14px 18px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.78);
+            backdrop-filter: blur(18px);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
         }
 
         .logo{
@@ -124,32 +173,35 @@
         }
 
         .logo img{
-            width: 42px;
-            height: 42px;
+            width: 46px;
+            height: 46px;
             object-fit: contain;
-            border-radius: 12px;
-            background: #0b5cff;
+            border-radius: 14px;
+            background: #2b6fff;
             padding: 4px;
+            box-shadow: 0 10px 24px rgba(43,111,255,0.18);
         }
 
         .logo-text{
             display: flex;
             flex-direction: column;
-            line-height: 1.1;
+            min-width: 0;
         }
 
-        .logo-span{
-            font-size: 22px;
+        .logo-title{
+            font-size: 28px;
             font-weight: 800;
-            color: var(--text);
+            letter-spacing: -0.02em;
+            line-height: 1;
         }
 
-        .logo-sub{
+        .logo-subtitle{
             font-size: 12px;
             color: var(--muted);
+            margin-top: 3px;
         }
 
-        .nav-links{
+        .nav-right{
             display: flex;
             align-items: center;
             gap: 20px;
@@ -160,369 +212,452 @@
             display: flex;
             align-items: center;
             gap: 22px;
-            flex-wrap: wrap;
         }
 
-        .nav-anchor{
+        .nav-list a{
             font-size: 15px;
+            font-weight: 700;
             color: var(--text);
-            font-weight: 600;
-            transition: .2s;
+            transition: .2s ease;
         }
 
-        .nav-anchor:hover{
+        .nav-list a:hover{
             color: var(--blue);
         }
 
-        .nav-main-btn{
-            background: linear-gradient(135deg, var(--blue), var(--accent));
-            color: #fff;
+        .nav-cta{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 13px 18px;
-            border-radius: 14px;
-            font-weight: 700;
-            box-shadow: 0 12px 24px rgba(11,92,255,0.24);
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--blue), #4f8dff);
+            color: #fff;
+            font-weight: 800;
+            box-shadow: 0 12px 28px rgba(43,111,255,0.22);
             white-space: nowrap;
         }
 
+        .menu-toggle{
+            display: none;
+            width: 46px;
+            height: 46px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            background: #f2f7ff;
+            border: 1px solid var(--line);
+        }
+
+        .menu-toggle span,
+        .menu-toggle span::before,
+        .menu-toggle span::after{
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 999px;
+            position: relative;
+        }
+
+        .menu-toggle span::before,
+        .menu-toggle span::after{
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+
+        .menu-toggle span::before{ top: -6px; }
+        .menu-toggle span::after{ top: 6px; }
+
         .hero{
             margin-top: 18px;
-            padding: 36px;
-            border-radius: 30px;
+            padding: 42px;
+            border-radius: var(--radius-xl);
             background:
-                linear-gradient(115deg, rgba(255,255,255,0.94) 0%, rgba(235,243,255,0.92) 52%, rgba(223,234,255,0.82) 100%);
-            border: 1px solid rgba(16,33,59,0.07);
+                linear-gradient(120deg, rgba(255,255,255,0.95) 0%, rgba(242,247,255,0.96) 52%, rgba(229,239,255,0.92) 100%);
+            border: 1px solid var(--line);
             box-shadow: var(--shadow);
-            overflow: hidden;
             position: relative;
+            overflow: hidden;
         }
 
         .hero::before{
             content: "";
             position: absolute;
-            inset: auto -60px -120px auto;
+            right: -70px;
+            bottom: -130px;
             width: 420px;
             height: 420px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(11,92,255,0.18), transparent 68%);
+            background: radial-gradient(circle, rgba(43,111,255,0.20), transparent 66%);
             pointer-events: none;
         }
 
         .hero-grid{
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 28px;
-            align-items: center;
             position: relative;
             z-index: 1;
+            display: grid;
+            grid-template-columns: 1.08fr 0.92fr;
+            gap: 28px;
+            align-items: center;
         }
 
-        .hero-kicker{
+        .hero-badge{
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 14px;
+            padding: 9px 14px;
             border-radius: 999px;
             background: var(--blue-soft);
             color: var(--blue-dark);
             font-size: 13px;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 16px;
         }
 
         .hero h1{
             font-size: clamp(40px, 6vw, 76px);
-            line-height: 0.98;
-            letter-spacing: -2px;
+            line-height: 0.95;
+            letter-spacing: -0.05em;
             margin-bottom: 18px;
-            color: var(--text);
         }
 
-        .hero-p{
+        .hero p{
             font-size: 20px;
-            line-height: 1.55;
+            line-height: 1.58;
             color: var(--muted);
             max-width: 760px;
-            margin-bottom: 22px;
         }
 
-        .hero-cta{
+        .hero-actions{
             display: flex;
             flex-wrap: wrap;
             gap: 14px;
-            margin-bottom: 18px;
+            margin: 24px 0 18px;
+        }
+
+        .btn{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 54px;
+            padding: 14px 22px;
+            border-radius: 16px;
+            font-weight: 800;
+            transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+        }
+
+        .btn:hover{
+            transform: translateY(-1px);
         }
 
         .btn-primary{
-            background: linear-gradient(135deg, var(--blue), var(--accent));
+            background: linear-gradient(135deg, var(--blue), #4f8dff);
             color: #fff;
-            padding: 15px 22px;
-            border-radius: 16px;
-            font-weight: 800;
-            box-shadow: 0 16px 30px rgba(11,92,255,0.24);
+            box-shadow: 0 14px 30px rgba(43,111,255,0.22);
         }
 
         .btn-secondary{
-            background: #fff;
+            background: rgba(255,255,255,0.84);
+            border: 1px solid var(--line-strong);
             color: var(--text);
-            border: 1px solid rgba(16,33,59,0.10);
-            padding: 15px 22px;
-            border-radius: 16px;
-            font-weight: 800;
         }
 
         .hero-note{
             display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-wrap: wrap;
+            gap: 14px;
             color: var(--muted);
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
+            line-height: 1.5;
         }
 
         .hero-card{
-            background: rgba(255,255,255,0.88);
-            border: 1px solid rgba(16,33,59,0.08);
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-            padding: 24px;
+            background: rgba(255,255,255,0.86);
+            border: 1px solid var(--line);
+            border-radius: 26px;
+            box-shadow: var(--shadow-soft);
+            padding: 26px;
+        }
+
+        .hero-card-header{
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 18px;
         }
 
         .hero-card-title{
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 800;
-            margin-bottom: 10px;
         }
 
         .hero-card-text{
             font-size: 15px;
             line-height: 1.6;
             color: var(--muted);
-            margin-bottom: 18px;
         }
 
-        .quick-points{
+        .prompt-list{
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
 
-        .quick-point{
-            padding: 14px;
+        .prompt-item{
+            padding: 16px;
             border-radius: 18px;
-            background: #f6f9ff;
-            border: 1px solid rgba(16,33,59,0.06);
+            background: #f7faff;
+            border: 1px solid rgba(19,39,70,0.06);
         }
 
-        .quick-point strong{
+        .prompt-item strong{
             display: block;
             font-size: 15px;
             margin-bottom: 6px;
         }
 
-        .quick-point span{
+        .prompt-item span{
+            display: block;
             font-size: 13px;
+            line-height: 1.5;
             color: var(--muted);
-            line-height: 1.45;
         }
 
-        .services-strip{
+        .hero-card-soft{
+            margin-top: 16px;
+            padding: 15px 16px;
+            border-radius: 16px;
+            background: linear-gradient(180deg, #f9fbff 0%, #eef5ff 100%);
+            border: 1px solid rgba(19,39,70,0.06);
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        .service-strip{
             margin-top: 18px;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 14px;
         }
 
-        .service-chip{
-            background: rgba(255,255,255,0.88);
-            border: 1px solid rgba(16,33,59,0.08);
-            border-radius: 20px;
+        .service-pill{
+            min-height: 126px;
             padding: 18px 16px;
-            box-shadow: var(--shadow);
-            min-height: 120px;
+            border-radius: 22px;
+            background: rgba(255,255,255,0.88);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-soft);
         }
 
-        .service-chip img{
+        .service-pill img{
             width: 30px;
             height: 30px;
             object-fit: contain;
             margin-bottom: 12px;
         }
 
-        .service-chip p{
+        .service-pill p{
             font-size: 16px;
             font-weight: 800;
-            line-height: 1.25;
+            line-height: 1.3;
         }
 
         .section{
-            padding: 74px 0 0;
+            padding-top: 76px;
         }
 
         .section-head{
             display: grid;
             grid-template-columns: 0.95fr 1.05fr;
-            gap: 30px;
+            gap: 28px;
             align-items: start;
             margin-bottom: 28px;
         }
 
         .eyebrow{
-            color: var(--blue);
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.10em;
+            color: var(--blue);
             margin-bottom: 12px;
         }
 
         .section-title{
             font-size: clamp(32px, 4vw, 52px);
             line-height: 1.04;
-            letter-spacing: -1px;
-            color: var(--text);
+            letter-spacing: -0.04em;
         }
 
         .section-text{
-            font-size: 21px;
-            line-height: 1.55;
+            font-size: 20px;
+            line-height: 1.6;
             color: var(--muted);
         }
 
-        .feature-grid{
+        .cards-3{
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 18px;
         }
 
-        .feature-card{
-            background: rgba(255,255,255,0.92);
-            border: 1px solid rgba(16,33,59,0.08);
-            border-radius: 24px;
-            box-shadow: var(--shadow);
+        .info-card{
             padding: 26px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.90);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-soft);
         }
 
-        .feature-card img{
+        .info-card img{
             width: 42px;
             height: 42px;
             object-fit: contain;
             margin-bottom: 18px;
         }
 
-        .feature-card h3{
-            font-size: 23px;
+        .info-card h3{
+            font-size: 22px;
             margin-bottom: 12px;
-            color: var(--text);
         }
 
-        .feature-card p{
+        .info-card p{
             font-size: 16px;
             line-height: 1.7;
             color: var(--muted);
-            margin-bottom: 16px;
         }
 
-        .card-link{
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--blue);
-            font-weight: 800;
-        }
-
-        .highlight-band{
+        .band{
             margin-top: 20px;
-            background: linear-gradient(135deg, #0b5cff, #2f7fff);
-            color: #fff;
+            padding: 24px;
             border-radius: 24px;
-            padding: 22px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 18px;
-            box-shadow: 0 18px 35px rgba(11,92,255,0.22);
-        }
-
-        .highlight-band strong{
-            font-size: 19px;
-            line-height: 1.5;
-        }
-
-        .highlight-band a{
-            white-space: nowrap;
-            background: #fff;
-            color: var(--blue-dark);
-            padding: 14px 18px;
-            border-radius: 14px;
-            font-weight: 800;
-        }
-
-        .contact-panel{
-            margin-top: 28px;
-            background: linear-gradient(135deg, #ffffff, #edf4ff);
-            border: 1px solid rgba(16,33,59,0.08);
-            border-radius: 26px;
-            box-shadow: var(--shadow);
-            padding: 28px;
+            background: linear-gradient(135deg, #2b6fff, #5a93ff);
+            color: #fff;
+            box-shadow: 0 18px 38px rgba(43,111,255,0.22);
             display: grid;
             grid-template-columns: 1fr auto;
-            gap: 22px;
+            gap: 16px;
             align-items: center;
         }
 
-        .contact-panel h3{
-            font-size: 28px;
+        .band strong{
+            font-size: 20px;
+            line-height: 1.55;
+        }
+
+        .band .btn-white{
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 14px 20px;
+            border-radius: 16px;
+            background: #fff;
+            color: var(--blue-dark);
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .steps{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        .step-card{
+            padding: 24px;
+            border-radius: 24px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.93) 0%, rgba(243,248,255,0.96) 100%);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .step-num{
+            width: 42px;
+            height: 42px;
+            border-radius: 14px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--blue-soft);
+            color: var(--blue-dark);
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .step-card h3{
+            font-size: 21px;
             margin-bottom: 10px;
         }
 
-        .contact-panel p{
+        .step-card p{
+            font-size: 16px;
+            line-height: 1.7;
             color: var(--muted);
+        }
+
+        .contact-box{
+            margin-top: 28px;
+            padding: 28px;
+            border-radius: 28px;
+            background: linear-gradient(135deg, #ffffff, #edf4ff);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .contact-box h3{
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .contact-box p{
             font-size: 17px;
             line-height: 1.65;
+            color: var(--muted);
+            max-width: 760px;
         }
 
         .contact-actions{
             display: flex;
-            gap: 12px;
             flex-wrap: wrap;
+            gap: 12px;
             justify-content: flex-end;
         }
 
-        .contact-actions a{
-            padding: 15px 18px;
-            border-radius: 16px;
-            font-weight: 800;
-        }
-
-        .contact-main{
-            background: linear-gradient(135deg, var(--blue), var(--accent));
-            color: #fff;
-        }
-
-        .contact-soft{
-            background: #fff;
+        .btn-channel{
+            background: rgba(255,255,255,0.84);
+            border: 1px solid var(--line-strong);
             color: var(--text);
-            border: 1px solid rgba(16,33,59,0.10);
         }
 
         .footer{
             margin-top: 74px;
-            padding: 34px 0 42px;
+            padding-bottom: 42px;
         }
 
         .footer-box{
-            background: rgba(255,255,255,0.82);
-            border: 1px solid rgba(16,33,59,0.08);
-            border-radius: 28px;
-            box-shadow: var(--shadow);
             padding: 30px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.84);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
         }
 
-        .footer-top{
+        .footer-grid{
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr 0.9fr;
+            grid-template-columns: 1.2fr 0.8fr 1fr;
             gap: 26px;
-            margin-bottom: 26px;
+            margin-bottom: 24px;
         }
 
         .footer h4{
@@ -530,7 +665,9 @@
             margin-bottom: 14px;
         }
 
-        .footer p, .footer li, .footer a{
+        .footer p,
+        .footer li,
+        .footer a{
             color: var(--muted);
             font-size: 15px;
             line-height: 1.8;
@@ -543,77 +680,37 @@
 
         .footer-bottom{
             padding-top: 18px;
-            border-top: 1px solid rgba(16,33,59,0.08);
+            border-top: 1px solid var(--line);
             color: var(--muted);
             font-size: 14px;
         }
 
-        .chat-float{
-            position: fixed;
-            right: 18px;
-            bottom: 18px;
-            z-index: 1200;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 10px;
-        }
-
-        .chat-tip{
-            max-width: 300px;
-            background: rgba(255,255,255,0.96);
-            border: 1px solid rgba(16,33,59,0.08);
-            border-radius: 18px;
-            box-shadow: var(--shadow);
-            padding: 14px 16px;
-        }
-
-        .chat-tip strong{
-            display: block;
-            font-size: 15px;
-            margin-bottom: 4px;
-        }
-
-        .chat-tip span{
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.45;
-        }
-
-        .chat-main-btn{
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, var(--blue), var(--accent));
-            color: #fff;
-            padding: 16px 20px;
-            border-radius: 999px;
-            font-weight: 800;
-            box-shadow: 0 18px 35px rgba(11,92,255,0.28);
-        }
-
-        .chat-dot{
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #71ff9f;
-            box-shadow: 0 0 0 6px rgba(113,255,159,0.18);
-        }
-
-        .mobile-chat-bar{
+        .mobile-bottom{
             display: none;
         }
 
-        @media (max-width: 1100px){
+        .hidden-anchor{
+            position: relative;
+            top: -120px;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        @media (max-width: 1120px){
             .hero-grid,
             .section-head,
-            .footer-top,
-            .contact-panel{
+            .footer-grid,
+            .contact-box,
+            .band{
                 grid-template-columns: 1fr;
             }
 
-            .services-strip,
-            .feature-grid{
+            .cards-3,
+            .steps{
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .service-strip{
                 grid-template-columns: repeat(2, 1fr);
             }
 
@@ -622,109 +719,165 @@
             }
         }
 
-        @media (max-width: 820px){
-            .nav-inner{
-                flex-direction: column;
+        @media (max-width: 860px){
+            .top-strip-inner{
                 align-items: flex-start;
+                flex-direction: column;
             }
 
-            .nav-links{
+            .nav-shell{
+                top: 82px;
+            }
+
+            .menu-toggle{
+                display: inline-flex;
+            }
+
+            .nav-right{
                 width: 100%;
+                display: none;
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: stretch;
+                gap: 16px;
+                padding-top: 4px;
+            }
+
+            .nav-bar.open .nav-right{
+                display: flex;
             }
 
             .nav-list{
+                flex-direction: column;
+                align-items: flex-start;
                 gap: 14px;
+            }
+
+            .nav-cta{
+                width: 100%;
             }
 
             .hero{
                 padding: 24px;
+                border-radius: 24px;
             }
 
-            .hero-p,
+            .hero p,
             .section-text{
                 font-size: 17px;
             }
 
-            .services-strip,
-            .feature-grid{
+            .prompt-list,
+            .cards-3,
+            .steps,
+            .service-strip{
                 grid-template-columns: 1fr;
             }
 
-            .top-strip-inner{
-                flex-direction: column;
-                align-items: flex-start;
+            .logo-title{
+                font-size: 24px;
             }
 
-            .chat-float{
-                right: 14px;
-                bottom: 14px;
-            }
-
-            .chat-tip{
-                display: none;
-            }
-
-            .mobile-chat-bar{
-                display: flex;
+            .mobile-bottom{
                 position: sticky;
                 bottom: 0;
-                z-index: 1100;
-                background: rgba(255,255,255,0.92);
-                backdrop-filter: blur(16px);
-                border-top: 1px solid rgba(16,33,59,0.08);
-                padding: 12px 14px;
-                margin-top: 24px;
+                z-index: 1000;
+                display: block;
+                margin-top: 22px;
+                padding: 12px 0 4px;
+                background: linear-gradient(180deg, rgba(238,245,255,0) 0%, rgba(238,245,255,0.92) 30%, rgba(238,245,255,0.98) 100%);
             }
 
-            .mobile-chat-bar a{
+            .mobile-bottom-inner{
+                width: var(--container);
+                margin: 0 auto;
+            }
+
+            .mobile-bottom .btn{
                 width: 100%;
-                text-align: center;
-                padding: 16px 18px;
-                border-radius: 16px;
-                font-weight: 800;
-                background: linear-gradient(135deg, var(--blue), var(--accent));
-                color: #fff;
-                box-shadow: 0 16px 30px rgba(11,92,255,0.20);
+                min-height: 56px;
+                border-radius: 18px;
+            }
+        }
+
+        @media (max-width: 560px){
+            .container,
+            .top-strip-inner,
+            .mobile-bottom-inner{
+                width: min(100% - 20px, 1200px);
+            }
+
+            .top-strip-text{
+                font-size: 13px;
+            }
+
+            .hero h1{
+                letter-spacing: -0.04em;
+            }
+
+            .hero-actions,
+            .contact-actions{
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn,
+            .band .btn-white{
+                width: 100%;
+            }
+
+            .footer-box{
+                padding: 22px;
+                border-radius: 24px;
+            }
+
+            .contact-box{
+                padding: 22px;
+                border-radius: 24px;
             }
         }
     </style>
 </head>
-
 <body>
     <div class="top-strip">
         <div class="top-strip-inner">
-            <div class="top-strip-badge">
-                <span>●</span>
-                <span>Оператор онлайн • Поможем быстро проверить маршрут и доступность города</span>
+            <div class="top-strip-text">
+                <span class="status-dot"></span>
+                <span>Оператор онлайн — подскажем по маршруту, срокам, документам и доступности направления</span>
             </div>
-            <a href="#live-chat" class="top-strip-btn">Открыть чат с оператором</a>
+
+            <div class="top-strip-actions">
+                <a href="https://t.me/cargodrive1" class="mini-link" target="_blank" rel="noopener noreferrer">Наш Telegram-канал</a>
+                <button class="mini-link primary js-open-chat" type="button">Написать оператору</button>
+            </div>
         </div>
     </div>
 
     <div class="container">
         <div class="header-wrap">
-            <div class="nav-bar">
-                <div class="nav-inner">
+            <div class="nav-shell">
+                <div class="nav-bar" id="navBar">
                     <div class="logo">
                         <img src="/static/images/company_l1ogo_white.png" alt="CargoDrive logo">
                         <div class="logo-text">
-                            <span class="logo-span">CargoDrive</span>
-                            <span class="logo-sub">Перевозки по Европе</span>
+                            <span class="logo-title">CargoDrive</span>
+                            <span class="logo-subtitle">Перевозки по Европе</span>
                         </div>
                     </div>
 
-                    <div class="nav-links">
+                    <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню" aria-expanded="false" aria-controls="navMenu">
+                        <span></span>
+                    </button>
+
+                    <div class="nav-right" id="navMenu">
                         <ul class="nav-list">
-                            <li><a class="nav-anchor" href="#home">Главная</a></li>
-                            <li><a class="nav-anchor" href="#about">О сервисе</a></li>
-                            <li><a class="nav-anchor" href="#services">Услуги</a></li>
-                            <li><a class="nav-anchor" href="#advantages">Преимущества</a></li>
-                            <li><a class="nav-anchor" href="#contacts">Контакты</a></li>
+                            <li><a href="#home">Главная</a></li>
+                            <li><a href="#about">О сервисе</a></li>
+                            <li><a href="#services">Услуги</a></li>
+                            <li><a href="#process">Как это работает</a></li>
+                            <li><a href="#contacts">Контакты</a></li>
                         </ul>
 
-                        <a href="#live-chat" class="nav-main-btn">Чат с оператором</a>
+                        <button class="nav-cta js-open-chat" type="button">Открыть чат</button>
                     </div>
                 </div>
             </div>
@@ -732,155 +885,202 @@
             <section class="hero" id="home">
                 <div class="hero-grid">
                     <div>
-                        <div class="hero-kicker">CargoDrive • Живой оператор на сайте</div>
+                        <div class="hero-badge">CargoDrive • Живой оператор на сайте</div>
 
-                        <h1>Грузовые перевозки<br>по Европе</h1>
+                        <h1>Перевозки, посылки<br>и документы<br>по Европе</h1>
 
-                        <p class="hero-p">
-                            CargoDrive помогает организовать грузовые перевозки, доставку документов
-                            и отправку грузов по Европе. Если вам нужно быстро узнать, доступна ли
-                            перевозка из нужного города или в нужное направление — просто напишите
-                            в чат на сайте, и оператор ответит вживую.
+                        <p>
+                            CargoDrive помогает быстро уточнить возможность отправки вещей, посылок,
+                            документов и других грузов по европейским направлениям. Чтобы согласовать
+                            маршрут, сроки и детали, просто откройте чат на сайте — оператор ответит
+                            вживую и подскажет по вашему запросу.
                         </p>
 
-                        <div class="hero-cta">
-                            <a href="#services" class="btn-primary">Наши услуги</a>
-                            <a href="#live-chat" class="btn-secondary">Узнать маршрут в чате</a>
+                        <div class="hero-actions">
+                            <a href="#services" class="btn btn-primary">Посмотреть услуги</a>
+                            <button class="btn btn-secondary js-open-chat" type="button">Уточнить маршрут</button>
                         </div>
 
                         <div class="hero-note">
                             <span>⏱ Обычно отвечаем быстро</span>
+                            <span>📍 Работаем по европейским направлениям</span>
+                            <span>💬 Все детали удобно согласовать прямо в чате</span>
                         </div>
                     </div>
 
                     <div class="hero-card">
-                        <div class="hero-card-title">Быстрый старт</div>
-                        <div class="hero-card-text">
-                            Напишите оператору прямо на сайте и уточните:
+                        <div class="hero-card-header">
+                            <div class="hero-card-title">Что лучше сразу написать оператору</div>
+                            <div class="hero-card-text">
+                                Так ответ будет быстрее и точнее. Достаточно нескольких основных деталей:
+                            </div>
                         </div>
 
-                        <div class="quick-points">
-                            <div class="quick-point">
-                                <strong>Откуда / куда</strong>
-                                <span>Проверим направление и маршрут</span>
+                        <div class="prompt-list">
+                            <div class="prompt-item">
+                                <strong>Откуда и куда</strong>
+                                <span>Укажите город отправления и город получения</span>
                             </div>
-                            <div class="quick-point">
-                                <strong>Тип груза</strong>
-                                <span>Подскажем по документам и отправке</span>
+                            <div class="prompt-item">
+                                <strong>Что именно нужно отправить</strong>
+                                <span>Документы, посылка, вещи или другой груз</span>
                             </div>
-                            <div class="quick-point">
+                            <div class="prompt-item">
                                 <strong>Сроки</strong>
-                                <span>Уточним доступность и детали</span>
+                                <span>Напишите, если важна срочность или конкретная дата</span>
                             </div>
-                            <div class="quick-point">
-                                <strong>Связь</strong>
-                                <span>Живой чат с оператором прямо на сайте</span>
+                            <div class="prompt-item">
+                                <strong>Дополнительные детали</strong>
+                                <span>Количество, объём, особенности упаковки или перевозки</span>
                             </div>
+                        </div>
+
+                        <div class="hero-card-soft">
+                            Пример короткого сообщения в чат:
+                            <strong>«Здравствуйте, интересует отправка из Варшавы в Милан, документы / посылка / вещи, подскажите доступность и сроки».</strong>
                         </div>
                     </div>
                 </div>
 
-                <div class="services-strip">
-                    <div class="service-chip">
+                <div class="service-strip">
+                    <div class="service-pill">
                         <img src="/static/svgs/ware-house.svg" alt="Грузы">
-                        <p>Грузовые<br>перевозки</p>
+                        <p>Перевозка<br>грузов и вещей</p>
                     </div>
-                    <div class="service-chip">
+
+                    <div class="service-pill">
                         <img src="/static/svgs/airplane.svg" alt="Документы">
                         <p>Доставка<br>документов</p>
                     </div>
-                    <div class="service-chip">
-                        <img src="/static/svgs/ship.svg" alt="Маршруты">
-                        <p>Маршруты<br>по Европе</p>
+
+                    <div class="service-pill">
+                        <img src="/static/svgs/ship.svg" alt="Посылки">
+                        <p>Посылки<br>по Европе</p>
                     </div>
-                    <div class="service-chip">
-                        <img src="/static/svgs/delivery-truck.svg" alt="Оператор">
-                        <p>Проверка города<br>через оператора</p>
+
+                    <div class="service-pill">
+                        <img src="/static/svgs/delivery-truck.svg" alt="Маршруты">
+                        <p>Проверка маршрута<br>и направления</p>
                     </div>
                 </div>
             </section>
         </div>
 
+        <span id="about" class="hidden-anchor"></span>
         <section class="section">
             <div class="section-head">
                 <div>
-                    <div class="eyebrow" id="about">CargoDrive (Карго Драйв)</div>
-                    <h2 class="section-title">Перевозки грузов и документов<br>с удобной связью через оператора</h2>
+                    <div class="eyebrow">CargoDrive</div>
+                    <h2 class="section-title">Удобный способ быстро согласовать перевозку без лишних шагов</h2>
                 </div>
 
                 <div class="section-text">
-                    Мы работаем по Европе и помогаем быстро уточнить возможность отправки
-                    из конкретного города или в нужное направление. Если вам нужно узнать,
-                    доступна ли доставка по вашему маршруту, достаточно написать оператору
-                    в живой чат на сайте.
+                    Мы сделали акцент на простом и понятном формате: если вам нужно уточнить,
+                    доступно ли направление, какие сроки возможны и что потребуется по отправке,
+                    всё можно быстро обсудить с оператором прямо на сайте.
                 </div>
             </div>
 
-            <div class="feature-grid" id="services">
-                <div class="feature-card">
-                    <img src="/static/svgs/airplane1.svg" alt="Грузовые перевозки">
-                    <h3>Грузовые перевозки</h3>
+            <div class="cards-3" id="services">
+                <div class="info-card">
+                    <img src="/static/svgs/airplane1.svg" alt="Перевозки">
+                    <h3>Перевозка вещей и грузов</h3>
                     <p>
-                        Организуем перевозку грузов по европейским направлениям.
-                        Если нужно уточнить конкретный город отправления или получения —
-                        просто откройте чат с оператором.
+                        Подходит для отправки личных вещей, коробок, посылок и других типов груза
+                        по европейским направлениям с предварительным уточнением деталей.
                     </p>
-                    <a class="card-link" href="#live-chat">Открыть чат →</a>
                 </div>
 
-                <div class="feature-card">
-                    <img src="/static/svgs/ship1.svg" alt="Доставка документов">
+                <div class="info-card">
+                    <img src="/static/svgs/ship1.svg" alt="Документы">
                     <h3>Доставка документов</h3>
                     <p>
-                        Помогаем с отправкой документов и других важных отправлений.
-                        В чате можно быстро уточнить маршрут, сроки и доступность направления.
+                        Если важно быстро понять доступность маршрута и ориентиры по срокам,
+                        оператор подскажет по вашему направлению в живом чате.
                     </p>
-                    <a class="card-link" href="#live-chat">Написать оператору →</a>
                 </div>
 
-                <div class="feature-card">
-                    <img src="/static/svgs/truck1.svg" alt="Проверка маршрута">
+                <div class="info-card">
+                    <img src="/static/svgs/truck1.svg" alt="Маршрут">
                     <h3>Проверка маршрута</h3>
                     <p>
-                        Не все направления одинаковы. Самый быстрый способ узнать,
-                        работает ли нужный маршрут — написать оператору прямо на сайте.
+                        Не нужно искать информацию вручную. Достаточно написать город отправления,
+                        точку назначения и тип отправления — оператор поможет с уточнением.
                     </p>
-                    <a class="card-link" href="#live-chat">Уточнить маршрут →</a>
                 </div>
             </div>
 
-            <div class="highlight-band" id="advantages">
-                <strong>Быстрая связь, понятная логика и живой оператор прямо на сайте</strong>
-                <a href="#live-chat">Открыть чат</a>
+            <div class="band">
+                <strong>Самый быстрый способ уточнить перевозку — открыть чат и сразу написать маршрут, тип отправления и желаемые сроки</strong>
+                <button class="btn-white js-open-chat" type="button">Написать оператору</button>
+            </div>
+        </section>
+
+        <section class="section" id="process">
+            <div class="section-head">
+                <div>
+                    <div class="eyebrow">Как это работает</div>
+                    <h2 class="section-title">Понятно, быстро и без перегруженного интерфейса</h2>
+                </div>
+
+                <div class="section-text">
+                    Мы убрали всё лишнее и оставили самое важное: понятную подачу, удобную навигацию
+                    и прямую связь через встроенный онлайн-чат.
+                </div>
             </div>
 
-            <div class="contact-panel" id="contacts">
-                <div>
-                    <h3>Нужна помощь с маршрутом?</h3>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h3>Открываете чат</h3>
                     <p>
-                        Напишите оператору прямо сейчас: можно уточнить город, направление,
-                        тип груза, документы и доступность перевозки. Чат на сайте находится
-                        внизу справа и работает как живая поддержка.
+                        Используйте любую кнопку «Открыть чат» или стандартную кнопку Tawk внизу сайта.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h3>Пишете основные детали</h3>
+                    <p>
+                        Город отправления, направление, что именно нужно отправить и если важна срочность — сроки.
+                    </p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h3>Получаете уточнение</h3>
+                    <p>
+                        Оператор отвечает в чате и помогает с согласованием маршрута, доступности и деталей отправки.
+                    </p>
+                </div>
+            </div>
+
+            <div class="contact-box" id="contacts">
+                <div>
+                    <h3>Нужно быстро уточнить маршрут?</h3>
+                    <p>
+                        Напишите оператору прямо на сайте. Чтобы ответ был точнее, лучше сразу указать:
+                        откуда и куда нужна отправка, что именно нужно перевезти, а также желаемые сроки.
+                        Для новостей и связи можно также перейти в наш Telegram-канал.
                     </p>
                 </div>
 
                 <div class="contact-actions">
-                    <a class="contact-main" href="#live-chat">Открыть чат</a>
-                    <a class="contact-soft" href="https://t.me/Devani_i" target="_blank">Telegram</a>
+                    <button class="btn btn-primary js-open-chat" type="button">Открыть чат с оператором</button>
+                    <a class="btn btn-channel" href="https://t.me/cargodrive1" target="_blank" rel="noopener noreferrer">Наш Telegram-канал</a>
                 </div>
             </div>
         </section>
 
         <footer class="footer">
             <div class="footer-box">
-                <div class="footer-top">
+                <div class="footer-grid">
                     <div>
-                        <h4>Почему выбирают нас</h4>
+                        <h4>О CargoDrive</h4>
                         <p>
                             CargoDrive — это удобный формат связи для тех, кому нужно быстро
-                            уточнить возможность перевозки. Мы работаем по Европе, перевозим
-                            грузы и документы, а информацию по конкретному городу или направлению
-                            можно получить через живой чат на сайте или в Telegram.
+                            уточнить возможность перевозки по Европе. Мы делаем акцент на
+                            понятной подаче, аккуратном интерфейсе и живом общении через онлайн-чат.
                         </p>
                     </div>
 
@@ -890,16 +1090,16 @@
                             <li><a href="#home">Главная</a></li>
                             <li><a href="#about">О сервисе</a></li>
                             <li><a href="#services">Услуги</a></li>
-                            <li><a href="#advantages">Преимущества</a></li>
+                            <li><a href="#process">Как это работает</a></li>
                             <li><a href="#contacts">Контакты</a></li>
                         </ul>
                     </div>
 
                     <div>
-                        <h4>Контакты</h4>
-                        <p>📍 Работаем по Европе</p>
-                        <p>📦 Перевозим грузы и документы</p>
-                        <p>✉️ Telegram: @Devani_i</p>
+                        <h4>Информация</h4>
+                        <p>📍 Работаем по европейским направлениям</p>
+                        <p>📦 Перевозки, посылки, вещи и документы</p>
+                        <p>💬 Основной способ связи — онлайн-чат на сайте</p>
                     </div>
                 </div>
 
@@ -908,53 +1108,75 @@
                 </div>
             </div>
         </footer>
-
-        <div class="mobile-chat-bar">
-            <a href="#live-chat">Открыть чат с оператором</a>
-        </div>
     </div>
 
-    <div class="chat-float" id="live-chat">
-        <div class="chat-tip">
-            <strong>Оператор онлайн</strong>
-            <span>Нажмите на кнопку ниже, чтобы открыть живой чат прямо на сайте.</span>
+    <div class="mobile-bottom">
+        <div class="mobile-bottom-inner">
+            <button class="btn btn-primary js-open-chat" type="button">Открыть чат с оператором</button>
         </div>
-        <a href="javascript:void(0)" class="chat-main-btn">
-            <span class="chat-dot"></span>
-            <span>Чат с оператором</span>
-        </a>
     </div>
 
     <script src="/static/scripts/main.js"></script>
 
-   <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/69b0a9e3ddd7fc1c34856875/1jjd1f821';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function(){
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/69b0a9e3ddd7fc1c34856875/1jjd1f821';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
 
     <script>
-        document.querySelectorAll('a[href="#live-chat"]').forEach(function(link){
-            link.addEventListener('click', function(e){
-                e.preventDefault();
-                var chatButton = document.querySelector('.tawk-min-container, .tawk-button, iframe[title*="chat"], iframe[title*="Chat"]');
-                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        (function(){
+            var navBar = document.getElementById('navBar');
+            var menuToggle = document.getElementById('menuToggle');
+            var navMenuLinks = document.querySelectorAll('#navMenu a');
 
-                setTimeout(function(){
-                    if (chatButton && typeof chatButton.click === 'function') {
-                        chatButton.click();
-                    }
-                }, 700);
+            if(menuToggle && navBar){
+                menuToggle.addEventListener('click', function(){
+                    var isOpen = navBar.classList.toggle('open');
+                    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+                });
+
+                navMenuLinks.forEach(function(link){
+                    link.addEventListener('click', function(){
+                        navBar.classList.remove('open');
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+
+            function openTawkChat(){
+                if (window.Tawk_API) {
+                    try {
+                        if (typeof window.Tawk_API.maximize === 'function') {
+                            window.Tawk_API.maximize();
+                            return;
+                        }
+                    } catch (e) {}
+                }
+
+                var possibleFrames = document.querySelectorAll('iframe[title*="chat"], iframe[title*="Chat"], iframe[title*="Tawk"], iframe[src*="tawk.to"]');
+                if (possibleFrames.length) {
+                    possibleFrames[0].scrollIntoView({ behavior: 'smooth', block: 'end' });
+                } else {
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+                }
+            }
+
+            document.querySelectorAll('.js-open-chat').forEach(function(button){
+                button.addEventListener('click', function(e){
+                    e.preventDefault();
+                    openTawkChat();
+                });
             });
-        });
+        })();
     </script>
 </body>
 </html>
