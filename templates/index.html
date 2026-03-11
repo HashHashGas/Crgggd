@@ -4,31 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CargoDrive — перевозки вещей, посылок и документов по Европе</title>
-    <meta name="description" content="CargoDrive помогает организовать перевозки вещей, посылок, документов и других отправлений по Европе. Для связи и уточнения маршрута нажмите кнопку «Написать оператору».">
-    <meta name="theme-color" content="#0f2347">
+    <meta name="description" content="CargoDrive — удобный сервис для согласования перевозки вещей, посылок, документов и других отправлений по Европе. Свяжитесь с оператором в онлайн-чате на сайте.">
+    <meta name="theme-color" content="#0b1220">
     <link rel="icon" href="/static/images/company_l1ogo_white.png">
 
     <style>
         :root{
-            --bg: #f3f7ff;
-            --bg-soft: #edf3ff;
-            --surface: rgba(255,255,255,0.82);
-            --surface-strong: #ffffff;
-            --text: #12284a;
-            --muted: #667c99;
-            --line: rgba(18,40,74,0.08);
-            --line-strong: rgba(18,40,74,0.14);
-            --blue: #215fff;
-            --blue-2: #4a88ff;
-            --blue-dark: #143d9c;
-            --navy: #0f2347;
-            --shadow: 0 18px 60px rgba(34,84,180,0.12);
-            --shadow-soft: 0 12px 28px rgba(34,84,180,0.10);
-            --radius-xl: 30px;
-            --radius-lg: 24px;
-            --radius-md: 18px;
-            --radius-sm: 14px;
-            --container: min(1180px, calc(100% - 32px));
+            --bg:#07111f;
+            --bg-2:#0c1728;
+            --panel:#0f1c31;
+            --panel-2:rgba(255,255,255,0.05);
+            --card:rgba(255,255,255,0.06);
+            --card-strong:rgba(255,255,255,0.09);
+            --line:rgba(255,255,255,0.09);
+            --text:#f4f7ff;
+            --muted:#96a7c4;
+            --blue:#4a7dff;
+            --blue-2:#78a4ff;
+            --blue-3:#2f5fe3;
+            --glow:0 20px 70px rgba(74,125,255,0.22);
+            --shadow:0 18px 50px rgba(0,0,0,0.28);
+            --radius-xl:34px;
+            --radius-lg:26px;
+            --radius-md:20px;
+            --radius-sm:16px;
+            --container:min(1180px, calc(100% - 28px));
         }
 
         *{
@@ -43,16 +43,17 @@
 
         body{
             font-family: Arial, sans-serif;
-            color: var(--text);
+            color:var(--text);
             background:
-                radial-gradient(circle at top left, rgba(33,95,255,0.12), transparent 26%),
-                radial-gradient(circle at top right, rgba(74,136,255,0.10), transparent 24%),
-                linear-gradient(180deg, #f9fbff 0%, #eef4ff 100%);
+                radial-gradient(circle at 12% 10%, rgba(74,125,255,0.22), transparent 24%),
+                radial-gradient(circle at 88% 14%, rgba(120,164,255,0.16), transparent 20%),
+                linear-gradient(180deg, #07111f 0%, #091423 42%, #0b1626 100%);
+            min-height:100vh;
         }
 
         a{
-            color: inherit;
-            text-decoration: none;
+            text-decoration:none;
+            color:inherit;
         }
 
         img{
@@ -61,25 +62,90 @@
         }
 
         button{
-            font: inherit;
             border:none;
+            font:inherit;
             background:none;
             cursor:pointer;
+            color:inherit;
         }
 
         .container{
-            width: var(--container);
-            margin: 0 auto;
+            width:var(--container);
+            margin:0 auto;
         }
 
-        .header-space{
-            padding-top: 18px;
+        .site-shell{
+            padding:18px 0 34px;
+        }
+
+        .topbar{
+            margin-bottom:16px;
+            border:1px solid var(--line);
+            background:rgba(255,255,255,0.04);
+            backdrop-filter:blur(18px);
+            border-radius:22px;
+            box-shadow:var(--shadow);
+        }
+
+        .topbar-inner{
+            min-height:58px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:14px;
+            padding:10px 16px;
+        }
+
+        .topbar-note{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            color:#dbe6ff;
+            font-size:14px;
+            font-weight:700;
+            line-height:1.45;
+        }
+
+        .status-dot{
+            width:10px;
+            height:10px;
+            border-radius:50%;
+            background:#79ffab;
+            box-shadow:0 0 0 6px rgba(121,255,171,0.12);
+            flex:0 0 auto;
+        }
+
+        .topbar-actions{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            flex-wrap:wrap;
+        }
+
+        .chip-link{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            min-height:42px;
+            padding:10px 14px;
+            border-radius:999px;
+            border:1px solid rgba(255,255,255,0.08);
+            background:rgba(255,255,255,0.04);
+            color:#eef4ff;
+            font-size:13px;
+            font-weight:800;
+            transition:.2s ease;
+        }
+
+        .chip-link:hover{
+            background:rgba(255,255,255,0.08);
         }
 
         .nav-wrap{
-            position: sticky;
-            top: 16px;
-            z-index: 1000;
+            position:sticky;
+            top:16px;
+            z-index:1000;
+            margin-bottom:18px;
         }
 
         .nav{
@@ -87,12 +153,12 @@
             align-items:center;
             justify-content:space-between;
             gap:20px;
-            padding: 16px 18px;
-            background: rgba(255,255,255,0.78);
-            backdrop-filter: blur(18px);
+            padding:16px 18px;
             border:1px solid var(--line);
-            border-radius: 24px;
-            box-shadow: var(--shadow);
+            background:rgba(9,20,35,0.72);
+            backdrop-filter:blur(18px);
+            border-radius:24px;
+            box-shadow:var(--shadow);
         }
 
         .logo{
@@ -103,13 +169,13 @@
         }
 
         .logo img{
-            width:46px;
-            height:46px;
+            width:48px;
+            height:48px;
             object-fit:contain;
-            border-radius:14px;
-            background: linear-gradient(135deg, var(--blue), var(--blue-2));
+            border-radius:15px;
+            background:linear-gradient(135deg, var(--blue), var(--blue-2));
             padding:4px;
-            box-shadow: 0 10px 24px rgba(33,95,255,0.22);
+            box-shadow:var(--glow);
         }
 
         .logo-text{
@@ -121,14 +187,14 @@
         .logo-title{
             font-size:28px;
             font-weight:800;
+            letter-spacing:-0.04em;
             line-height:1;
-            letter-spacing:-0.03em;
         }
 
         .logo-sub{
             margin-top:4px;
-            font-size:12px;
             color:var(--muted);
+            font-size:12px;
         }
 
         .nav-right{
@@ -141,36 +207,32 @@
             list-style:none;
             display:flex;
             align-items:center;
-            gap:22px;
+            gap:20px;
         }
 
         .nav-list a{
+            color:#d8e5ff;
             font-size:15px;
             font-weight:700;
-            color:var(--text);
             transition:.2s ease;
         }
 
         .nav-list a:hover{
-            color:var(--blue);
+            color:#fff;
         }
 
-        .phone-note{
-            display:flex;
-            flex-direction:column;
-            align-items:flex-end;
-            gap:2px;
-            text-align:right;
-        }
-
-        .phone-note strong{
-            font-size:14px;
-            color:var(--text);
-        }
-
-        .phone-note span{
-            font-size:12px;
-            color:var(--muted);
+        .nav-cta{
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            min-height:48px;
+            padding:12px 18px;
+            border-radius:15px;
+            background:linear-gradient(135deg, var(--blue), var(--blue-2));
+            color:#fff;
+            font-weight:800;
+            box-shadow:var(--glow);
+            white-space:nowrap;
         }
 
         .menu-btn{
@@ -180,7 +242,7 @@
             align-items:center;
             justify-content:center;
             border-radius:14px;
-            background:#f2f6ff;
+            background:rgba(255,255,255,0.06);
             border:1px solid var(--line);
         }
 
@@ -191,437 +253,427 @@
             display:block;
             width:20px;
             height:2px;
-            background:var(--text);
+            background:#fff;
             border-radius:999px;
             position:relative;
         }
 
-        .menu-btn span::before{ position:absolute; top:-6px; left:0; }
-        .menu-btn span::after{ position:absolute; top:6px; left:0; }
+        .menu-btn span::before{
+            position:absolute;
+            top:-6px;
+            left:0;
+        }
+
+        .menu-btn span::after{
+            position:absolute;
+            top:6px;
+            left:0;
+        }
 
         .hero{
-            margin-top: 18px;
-            padding: 42px;
-            border-radius: var(--radius-xl);
-            background:
-                linear-gradient(125deg, rgba(255,255,255,0.96) 0%, rgba(241,246,255,0.95) 100%);
-            border:1px solid var(--line);
-            box-shadow: var(--shadow);
             position:relative;
             overflow:hidden;
+            border-radius:var(--radius-xl);
+            border:1px solid var(--line);
+            background:
+                linear-gradient(135deg, rgba(17,31,53,0.96) 0%, rgba(11,20,36,0.98) 65%, rgba(10,18,31,1) 100%);
+            box-shadow:var(--shadow);
         }
 
         .hero::before{
             content:"";
             position:absolute;
-            right:-90px;
-            top:-60px;
-            width:400px;
-            height:400px;
+            right:-110px;
+            top:-120px;
+            width:430px;
+            height:430px;
             border-radius:50%;
-            background: radial-gradient(circle, rgba(33,95,255,0.18), transparent 68%);
+            background:radial-gradient(circle, rgba(74,125,255,0.30), transparent 68%);
             pointer-events:none;
         }
 
-        .hero-grid{
+        .hero::after{
+            content:"";
+            position:absolute;
+            left:-120px;
+            bottom:-180px;
+            width:380px;
+            height:380px;
+            border-radius:50%;
+            background:radial-gradient(circle, rgba(120,164,255,0.14), transparent 70%);
+            pointer-events:none;
+        }
+
+        .hero-inner{
             position:relative;
             z-index:1;
             display:grid;
-            grid-template-columns: 1.08fr 0.92fr;
-            gap:28px;
+            grid-template-columns:1.08fr 0.92fr;
+            gap:26px;
+            padding:52px;
             align-items:center;
         }
 
-        .hero-kicker{
+        .hero-badge{
             display:inline-flex;
             align-items:center;
             gap:8px;
-            padding:9px 14px;
+            padding:10px 14px;
             border-radius:999px;
-            background:#dce8ff;
-            color:var(--blue-dark);
+            background:rgba(255,255,255,0.08);
+            border:1px solid rgba(255,255,255,0.08);
+            color:#dce7ff;
             font-size:13px;
             font-weight:800;
-            margin-bottom:16px;
-        }
-
-        .hero h1{
-            font-size: clamp(42px, 6vw, 78px);
-            line-height:0.95;
-            letter-spacing:-0.06em;
             margin-bottom:18px;
         }
 
-        .hero p{
-            font-size:20px;
-            line-height:1.6;
-            color:var(--muted);
+        .hero h1{
+            font-size:clamp(42px, 6vw, 86px);
+            line-height:0.92;
+            letter-spacing:-0.07em;
+            margin-bottom:18px;
             max-width:760px;
         }
 
-        .hero-actions{
-            display:flex;
-            align-items:center;
-            gap:14px;
-            flex-wrap:wrap;
-            margin-top:26px;
+        .hero p{
+            color:var(--muted);
+            font-size:20px;
+            line-height:1.65;
+            max-width:700px;
         }
 
-        .main-cta{
+        .hero-actions{
+            margin-top:28px;
+            display:flex;
+            gap:14px;
+            flex-wrap:wrap;
+        }
+
+        .btn-primary,
+        .btn-secondary{
             display:inline-flex;
             align-items:center;
             justify-content:center;
             min-height:58px;
             padding:16px 24px;
             border-radius:18px;
-            background: linear-gradient(135deg, var(--blue), var(--blue-2));
-            color:#fff;
-            font-weight:800;
             font-size:16px;
-            box-shadow: 0 16px 34px rgba(33,95,255,0.24);
+            font-weight:800;
+            transition:.2s ease;
         }
 
-        .hero-note{
-            margin-top:16px;
+        .btn-primary{
+            background:linear-gradient(135deg, var(--blue), var(--blue-2));
+            color:#fff;
+            box-shadow:var(--glow);
+        }
+
+        .btn-secondary{
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.09);
+            color:#eef4ff;
+        }
+
+        .btn-primary:hover,
+        .btn-secondary:hover,
+        .nav-cta:hover{
+            transform:translateY(-1px);
+        }
+
+        .hero-meta{
+            margin-top:18px;
             display:flex;
             flex-wrap:wrap;
-            gap:14px;
-            color:var(--muted);
-            font-size:14px;
+            gap:12px;
+        }
+
+        .hero-meta span{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            min-height:40px;
+            padding:9px 12px;
+            border-radius:999px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.07);
+            color:#dce7ff;
+            font-size:13px;
             font-weight:700;
-            line-height:1.5;
+        }
+
+        .hero-side{
+            display:flex;
+            flex-direction:column;
+            gap:14px;
         }
 
         .hero-card{
-            padding:26px;
-            border-radius:26px;
-            background: rgba(255,255,255,0.88);
-            border:1px solid var(--line);
-            box-shadow: var(--shadow-soft);
+            border-radius:28px;
+            padding:24px;
+            background:linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.04) 100%);
+            border:1px solid rgba(255,255,255,0.08);
+            box-shadow:var(--shadow);
         }
 
         .hero-card h3{
-            font-size:28px;
+            font-size:26px;
             line-height:1.2;
-            margin-bottom:12px;
+            margin-bottom:10px;
         }
 
         .hero-card p{
-            font-size:16px;
+            font-size:15px;
             line-height:1.7;
             color:var(--muted);
             margin-bottom:18px;
         }
 
-        .prompt-grid{
+        .mini-grid{
             display:grid;
             grid-template-columns:1fr 1fr;
             gap:12px;
         }
 
-        .prompt{
+        .mini-item{
             padding:16px;
             border-radius:18px;
-            background:#f7faff;
-            border:1px solid rgba(18,40,74,0.06);
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.07);
         }
 
-        .prompt strong{
+        .mini-item strong{
             display:block;
             font-size:15px;
             margin-bottom:6px;
         }
 
-        .prompt span{
+        .mini-item span{
+            display:block;
+            color:var(--muted);
+            font-size:13px;
+            line-height:1.55;
+        }
+
+        .glass-note{
+            display:flex;
+            align-items:flex-start;
+            gap:12px;
+            padding:18px 18px;
+            border-radius:22px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.08);
+        }
+
+        .glass-note-icon{
+            width:44px;
+            height:44px;
+            flex:0 0 auto;
+            border-radius:14px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:linear-gradient(135deg, rgba(74,125,255,0.22), rgba(120,164,255,0.18));
+            font-size:20px;
+        }
+
+        .glass-note strong{
+            display:block;
+            font-size:15px;
+            margin-bottom:4px;
+        }
+
+        .glass-note span{
             display:block;
             font-size:13px;
             line-height:1.55;
             color:var(--muted);
         }
 
-        .hero-box{
-            margin-top:18px;
-            padding:16px;
-            border-radius:18px;
-            background: linear-gradient(180deg, #f9fbff 0%, #eff5ff 100%);
-            border:1px solid rgba(18,40,74,0.06);
-            color:var(--muted);
-            font-size:14px;
-            line-height:1.65;
+        .compact-section{
+            padding-top:22px;
         }
 
-        .services{
-            margin-top:18px;
+        .dashboard{
             display:grid;
-            grid-template-columns:repeat(4,1fr);
-            gap:14px;
-        }
-
-        .service{
-            min-height:124px;
-            padding:18px 16px;
-            border-radius:22px;
-            background: rgba(255,255,255,0.90);
-            border:1px solid var(--line);
-            box-shadow: var(--shadow-soft);
-        }
-
-        .service img{
-            width:30px;
-            height:30px;
-            object-fit:contain;
-            margin-bottom:12px;
-        }
-
-        .service p{
-            font-size:16px;
-            font-weight:800;
-            line-height:1.3;
-        }
-
-        .section{
-            padding-top:76px;
-        }
-
-        .section-head{
-            display:grid;
-            grid-template-columns:0.95fr 1.05fr;
-            gap:28px;
-            align-items:start;
-            margin-bottom:28px;
-        }
-
-        .eyebrow{
-            font-size:13px;
-            font-weight:800;
-            text-transform:uppercase;
-            letter-spacing:.10em;
-            color:var(--blue);
-            margin-bottom:12px;
-        }
-
-        .section-title{
-            font-size: clamp(34px, 4vw, 54px);
-            line-height:1.04;
-            letter-spacing:-0.05em;
-        }
-
-        .section-text{
-            font-size:20px;
-            line-height:1.6;
-            color:var(--muted);
-        }
-
-        .cards{
-            display:grid;
-            grid-template-columns:repeat(3,1fr);
+            grid-template-columns:1.04fr 0.96fr;
             gap:18px;
         }
 
-        .card{
-            padding:26px;
-            border-radius:24px;
-            background: rgba(255,255,255,0.92);
+        .block{
+            border-radius:28px;
             border:1px solid var(--line);
-            box-shadow: var(--shadow-soft);
+            background:linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.035) 100%);
+            box-shadow:var(--shadow);
+            padding:28px;
         }
 
-        .card img{
-            width:42px;
-            height:42px;
-            object-fit:contain;
-            margin-bottom:18px;
+        .section-kicker{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            color:#b9cbef;
+            font-size:12px;
+            font-weight:800;
+            text-transform:uppercase;
+            letter-spacing:.12em;
+            margin-bottom:14px;
         }
 
-        .card h3{
-            font-size:22px;
+        .block h2{
+            font-size:clamp(30px, 4vw, 50px);
+            line-height:1.03;
+            letter-spacing:-0.05em;
+            margin-bottom:14px;
+        }
+
+        .block-text{
+            color:var(--muted);
+            font-size:18px;
+            line-height:1.7;
+        }
+
+        .features{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:12px;
+            margin-top:22px;
+        }
+
+        .feature{
+            border-radius:20px;
+            padding:18px;
+            background:rgba(255,255,255,0.04);
+            border:1px solid rgba(255,255,255,0.07);
+        }
+
+        .feature-top{
+            display:flex;
+            align-items:center;
+            gap:12px;
             margin-bottom:12px;
         }
 
-        .card p{
-            font-size:16px;
-            line-height:1.7;
-            color:var(--muted);
-        }
-
-        .premium-band{
-            margin-top:20px;
-            padding:24px;
-            border-radius:24px;
-            background: linear-gradient(135deg, #17376f, #2457b3);
-            color:#fff;
-            box-shadow: 0 18px 38px rgba(25,65,143,0.22);
-            display:grid;
-            grid-template-columns:1fr auto;
-            gap:16px;
+        .feature-icon{
+            width:42px;
+            height:42px;
+            border-radius:14px;
+            display:flex;
             align-items:center;
+            justify-content:center;
+            background:linear-gradient(135deg, rgba(74,125,255,0.24), rgba(120,164,255,0.16));
+            border:1px solid rgba(255,255,255,0.06);
         }
 
-        .premium-band strong{
-            font-size:20px;
-            line-height:1.6;
+        .feature h3{
+            font-size:18px;
         }
 
-        .premium-band button{
-            min-height:54px;
-            padding:14px 20px;
-            border-radius:16px;
-            background:#fff;
-            color:#143d9c;
-            font-weight:800;
-            white-space:nowrap;
+        .feature p{
+            color:var(--muted);
+            font-size:14px;
+            line-height:1.65;
         }
 
         .steps{
             display:grid;
-            grid-template-columns:repeat(3,1fr);
-            gap:18px;
-            margin-top:18px;
+            gap:12px;
         }
 
         .step{
-            padding:24px;
-            border-radius:24px;
-            background: linear-gradient(180deg, rgba(255,255,255,0.94) 0%, rgba(243,248,255,0.98) 100%);
-            border:1px solid var(--line);
-            box-shadow: var(--shadow-soft);
+            display:grid;
+            grid-template-columns:54px 1fr;
+            gap:14px;
+            padding:18px;
+            border-radius:20px;
+            background:rgba(255,255,255,0.04);
+            border:1px solid rgba(255,255,255,0.07);
         }
 
         .step-num{
-            width:42px;
-            height:42px;
-            border-radius:14px;
-            display:inline-flex;
+            width:54px;
+            height:54px;
+            border-radius:18px;
+            display:flex;
             align-items:center;
             justify-content:center;
-            background:#dce8ff;
-            color:var(--blue-dark);
+            background:linear-gradient(135deg, var(--blue), var(--blue-2));
+            color:#fff;
             font-weight:800;
-            margin-bottom:14px;
+            box-shadow:var(--glow);
         }
 
         .step h3{
-            font-size:21px;
-            margin-bottom:10px;
+            font-size:18px;
+            margin-bottom:6px;
         }
 
         .step p{
-            font-size:16px;
-            line-height:1.7;
             color:var(--muted);
+            font-size:14px;
+            line-height:1.65;
         }
 
-        .contact-panel{
-            margin-top:28px;
-            padding:28px;
-            border-radius:28px;
-            background: linear-gradient(135deg, #ffffff, #edf4ff);
+        .cta-panel{
+            margin-top:18px;
+            border-radius:30px;
             border:1px solid var(--line);
-            box-shadow: var(--shadow);
+            background:
+                linear-gradient(135deg, rgba(74,125,255,0.17) 0%, rgba(120,164,255,0.09) 100%),
+                rgba(255,255,255,0.04);
+            box-shadow:var(--shadow);
+            padding:28px;
             display:grid;
             grid-template-columns:1fr auto;
-            gap:20px;
+            gap:18px;
             align-items:center;
         }
 
-        .contact-panel h3{
+        .cta-panel h3{
             font-size:30px;
+            line-height:1.1;
             margin-bottom:10px;
         }
 
-        .contact-panel p{
-            font-size:17px;
-            line-height:1.65;
+        .cta-panel p{
             color:var(--muted);
+            font-size:17px;
+            line-height:1.7;
             max-width:760px;
         }
 
-        .phones{
-            margin-top:14px;
-            padding:16px 18px;
-            border-radius:18px;
-            background:#f8fbff;
-            border:1px solid rgba(18,40,74,0.06);
-        }
-
-        .phones strong{
-            display:block;
-            margin-bottom:8px;
-            font-size:15px;
-        }
-
-        .phones span{
-            display:block;
-            color:var(--muted);
-            font-size:14px;
-            line-height:1.7;
-        }
-
-        .phones small{
-            display:block;
-            margin-top:8px;
-            color:#8a97aa;
-            font-size:13px;
-            line-height:1.5;
-        }
-
-        .contact-actions{
+        .cta-actions{
             display:flex;
             gap:12px;
             flex-wrap:wrap;
             justify-content:flex-end;
         }
 
-        .contact-actions button,
-        .contact-actions a{
-            min-height:54px;
-            padding:14px 20px;
-            border-radius:16px;
-            font-weight:800;
-        }
-
-        .contact-actions .primary{
-            background: linear-gradient(135deg, var(--blue), var(--blue-2));
-            color:#fff;
-            box-shadow: 0 14px 30px rgba(33,95,255,0.22);
-        }
-
-        .contact-actions .soft{
-            background:#fff;
-            border:1px solid var(--line-strong);
-            color:var(--text);
-        }
-
         .footer{
-            margin-top:74px;
-            padding-bottom:42px;
+            padding-top:18px;
         }
 
         .footer-box{
-            padding:30px;
-            border-radius:30px;
-            background: rgba(255,255,255,0.86);
+            border-radius:28px;
             border:1px solid var(--line);
-            box-shadow: var(--shadow);
-        }
-
-        .footer-grid{
+            background:rgba(255,255,255,0.04);
+            box-shadow:var(--shadow);
+            padding:26px;
             display:grid;
-            grid-template-columns:1.15fr 0.8fr 1fr;
-            gap:26px;
-            margin-bottom:24px;
+            grid-template-columns:1.1fr 0.9fr 1fr;
+            gap:22px;
         }
 
         .footer h4{
-            font-size:20px;
-            margin-bottom:14px;
+            font-size:18px;
+            margin-bottom:12px;
         }
 
         .footer p,
         .footer li,
         .footer a{
             color:var(--muted);
-            font-size:15px;
+            font-size:14px;
             line-height:1.8;
             list-style:none;
         }
@@ -631,38 +683,29 @@
         }
 
         .footer-bottom{
-            padding-top:18px;
-            border-top:1px solid var(--line);
-            color:var(--muted);
-            font-size:14px;
+            margin-top:18px;
+            padding-top:16px;
+            border-top:1px solid rgba(255,255,255,0.08);
+            color:#8ea3c7;
+            font-size:13px;
         }
 
         .hidden-anchor{
             position:relative;
-            top:-120px;
+            top:-110px;
             visibility:hidden;
             pointer-events:none;
         }
 
-        @media (max-width:1120px){
-            .hero-grid,
-            .section-head,
-            .premium-band,
-            .contact-panel,
-            .footer-grid{
+        @media (max-width:1100px){
+            .hero-inner,
+            .dashboard,
+            .cta-panel,
+            .footer-box{
                 grid-template-columns:1fr;
             }
 
-            .cards,
-            .steps{
-                grid-template-columns:repeat(2,1fr);
-            }
-
-            .services{
-                grid-template-columns:repeat(2,1fr);
-            }
-
-            .contact-actions{
+            .cta-actions{
                 justify-content:flex-start;
             }
         }
@@ -691,325 +734,289 @@
                 gap:14px;
             }
 
-            .phone-note{
-                align-items:flex-start;
-                text-align:left;
-            }
-
-            .hero{
+            .hero-inner{
                 padding:24px;
-                border-radius:24px;
             }
 
             .hero p,
-            .section-text{
-                font-size:17px;
+            .block-text,
+            .cta-panel p{
+                font-size:16px;
             }
 
-            .prompt-grid,
-            .cards,
-            .steps,
-            .services{
+            .mini-grid,
+            .features{
                 grid-template-columns:1fr;
+            }
+
+            .topbar-inner{
+                flex-direction:column;
+                align-items:flex-start;
             }
         }
 
         @media (max-width:560px){
             .container{
-                width:min(100% - 20px, 1180px);
+                width:min(100% - 18px, 1180px);
             }
 
             .hero-actions,
-            .contact-actions{
+            .cta-actions{
                 flex-direction:column;
                 align-items:stretch;
             }
 
-            .main-cta,
-            .hero-actions button,
-            .hero-actions a,
-            .contact-actions button,
-            .contact-actions a,
-            .premium-band button{
+            .btn-primary,
+            .btn-secondary,
+            .nav-cta,
+            .chip-link{
                 width:100%;
             }
 
-            .hero h1{
-                letter-spacing:-0.04em;
+            .footer-box,
+            .block,
+            .cta-panel{
+                padding:20px;
             }
 
-            .footer-box,
-            .contact-panel{
-                padding:22px;
-                border-radius:24px;
+            .hero h1{
+                letter-spacing:-0.05em;
+            }
+
+            .step{
+                grid-template-columns:1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header-space">
-            <div class="nav-wrap">
-                <div class="nav" id="navRoot">
-                    <div class="logo">
-                        <img src="/static/images/company_l1ogo_white.png" alt="CargoDrive logo">
-                        <div class="logo-text">
-                            <span class="logo-title">CargoDrive</span>
-                            <span class="logo-sub">Перевозки по Европе</span>
-                        </div>
-                    </div>
+    <div class="container site-shell">
+        <div class="topbar">
+            <div class="topbar-inner">
+                <div class="topbar-note">
+                    <span class="status-dot"></span>
+                    <span>Оператор онлайн — поможем быстро уточнить маршрут, сроки и детали отправки</span>
+                </div>
 
-                    <button class="menu-btn" id="menuBtn" aria-label="Открыть меню" aria-expanded="false">
-                        <span></span>
-                    </button>
-
-                    <div class="nav-right" id="navMenu">
-                        <ul class="nav-list">
-                            <li><a href="#home">Главная</a></li>
-                            <li><a href="#about">О сервисе</a></li>
-                            <li><a href="#services">Услуги</a></li>
-                            <li><a href="#process">Как это работает</a></li>
-                            <li><a href="#contacts">Контакты</a></li>
-                        </ul>
-
-                        <div class="phone-note">
-                            <strong>+7 (900) 000-00-00</strong>
-                            <span>+7 (900) 111-11-11</span>
-                            <span>(временно на тех работах)</span>
-                        </div>
-                    </div>
+                <div class="topbar-actions">
+                    <a class="chip-link" href="https://t.me/cargodrive1" target="_blank" rel="noopener noreferrer">Наш Telegram-канал</a>
                 </div>
             </div>
+        </div>
 
-            <section class="hero" id="home">
-                <div class="hero-grid">
-                    <div>
-                        <div class="hero-kicker">CargoDrive • Премиальный формат связи через оператора</div>
+        <div class="nav-wrap">
+            <div class="nav" id="navRoot">
+                <div class="logo">
+                    <img src="/static/images/company_l1ogo_white.png" alt="CargoDrive logo">
+                    <div class="logo-text">
+                        <span class="logo-title">CargoDrive</span>
+                        <span class="logo-sub">Перевозки по Европе</span>
+                    </div>
+                </div>
 
-                        <h1>Помогаем перевезти вещи,<br>посылки и документы<br>из Европы</h1>
+                <button class="menu-btn" id="menuBtn" aria-label="Открыть меню" aria-expanded="false">
+                    <span></span>
+                </button>
 
-                        <p>
-                            CargoDrive помогает быстро согласовать перевозку вещей, посылок,
-                            документов и других отправлений по европейским направлениям.
-                            Чтобы связаться с нами, нажмите на кнопку <strong>«Написать оператору»</strong> —
-                            откроется живой чат на сайте, где можно сразу уточнить маршрут,
-                            сроки и детали отправки.
-                        </p>
+                <div class="nav-right" id="navMenu">
+                    <ul class="nav-list">
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О сервисе</a></li>
+                        <li><a href="#how">Как это работает</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
 
-                        <div class="hero-actions">
-                            <button class="main-cta js-open-chat" type="button">Написать оператору</button>
-                        </div>
+                    <button class="nav-cta js-open-chat" type="button">💬 Начать чат</button>
+                </div>
+            </div>
+        </div>
 
-                        <div class="hero-note">
-                            <span>💬 Основной способ связи — онлайн-чат на сайте</span>
-                            <span>📍 Работаем по европейским направлениям</span>
-                            <span>⏱ Обычно отвечаем быстро</span>
-                        </div>
+        <section class="hero" id="home">
+            <div class="hero-inner">
+                <div>
+                    <div class="hero-badge">CargoDrive • Компактный и удобный сервис связи</div>
+
+                    <h1>Перевозки без лишнего шума.<br>Только понятный маршрут,<br>чат и быстрый ответ.</h1>
+
+                    <p>
+                        CargoDrive помогает быстро согласовать перевозку вещей, посылок,
+                        документов и других отправлений по Европе. Здесь всё построено
+                        вокруг одного удобного сценария: вы открываете чат, пишете детали,
+                        и оператор помогает по вашему направлению.
+                    </p>
+
+                    <div class="hero-actions">
+                        <button class="btn-primary js-open-chat" type="button">💬 Написать оператору</button>
+                        <a class="btn-secondary" href="https://t.me/cargodrive1" target="_blank" rel="noopener noreferrer">Наш Telegram-канал</a>
                     </div>
 
-                    <div class="hero-card">
-                        <h3>Что лучше сразу написать оператору</h3>
-                        <p>
-                            Так ответ будет быстрее и точнее. Достаточно нескольких базовых деталей:
-                        </p>
+                    <div class="hero-meta">
+                        <span>📍 Европейские направления</span>
+                        <span>📦 Вещи, посылки, документы</span>
+                        <span>⏱ Обычно отвечаем быстро</span>
+                    </div>
+                </div>
 
-                        <div class="prompt-grid">
-                            <div class="prompt">
-                                <strong>Откуда и куда</strong>
-                                <span>Город отправления и город получения</span>
+                <div class="hero-side">
+                    <div class="hero-card">
+                        <h3>Что написать в чат</h3>
+                        <p>Чтобы получить ответ быстрее, лучше сразу отправить несколько базовых деталей.</p>
+
+                        <div class="mini-grid">
+                            <div class="mini-item">
+                                <strong>Маршрут</strong>
+                                <span>Откуда и куда нужна отправка</span>
                             </div>
-                            <div class="prompt">
-                                <strong>Что нужно отправить</strong>
-                                <span>Документы, посылка, вещи или другой груз</span>
+                            <div class="mini-item">
+                                <strong>Тип отправления</strong>
+                                <span>Документы, посылка, вещи или груз</span>
                             </div>
-                            <div class="prompt">
+                            <div class="mini-item">
                                 <strong>Сроки</strong>
                                 <span>Если важна срочность или конкретная дата</span>
                             </div>
-                            <div class="prompt">
+                            <div class="mini-item">
                                 <strong>Дополнительно</strong>
-                                <span>Количество, объём, упаковка и важные детали</span>
+                                <span>Количество, объём и другие важные детали</span>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="hero-box">
-                            Пример короткого сообщения в чат:
-                            <strong>«Здравствуйте, интересует отправка из Варшавы в Милан, вещи / документы / посылка, подскажите доступность и сроки».</strong>
+                    <div class="glass-note">
+                        <div class="glass-note-icon">✦</div>
+                        <div>
+                            <strong>Пример сообщения</strong>
+                            <span>Здравствуйте, интересует отправка из Варшавы в Милан, подскажите доступность, сроки и детали по посылке / документам / вещам.</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="services">
-                    <div class="service">
-                        <img src="/static/svgs/ware-house.svg" alt="Вещи и грузы">
-                        <p>Перевозка вещей<br>и грузов</p>
-                    </div>
-
-                    <div class="service">
-                        <img src="/static/svgs/airplane.svg" alt="Документы">
-                        <p>Доставка<br>документов</p>
-                    </div>
-
-                    <div class="service">
-                        <img src="/static/svgs/ship.svg" alt="Посылки">
-                        <p>Посылки<br>по Европе</p>
-                    </div>
-
-                    <div class="service">
-                        <img src="/static/svgs/delivery-truck.svg" alt="Маршруты">
-                        <p>Проверка маршрута<br>и направления</p>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <span id="about" class="hidden-anchor"></span>
-        <section class="section">
-            <div class="section-head">
-                <div>
-                    <div class="eyebrow">CargoDrive</div>
-                    <h2 class="section-title">Понятный сервис без перегруженного интерфейса и лишнего шума</h2>
-                </div>
-
-                <div class="section-text">
-                    Мы сохранили главный смысл сервиса: помочь быстро согласовать перевозку
-                    из Европы и не заставлять человека искать информацию по всему сайту.
-                    Основной сценарий простой — зашёл, нажал <strong>«Написать оператору»</strong>,
-                    открылся чат, дальше всё решается по запросу.
-                </div>
-            </div>
-
-            <div class="cards" id="services">
-                <div class="card">
-                    <img src="/static/svgs/airplane1.svg" alt="Перевозки">
-                    <h3>Вещи и грузы</h3>
-                    <p>
-                        Подходит для отправки личных вещей, коробок, посылок и других типов груза
-                        по европейским направлениям с предварительным уточнением деталей через оператора.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <img src="/static/svgs/ship1.svg" alt="Документы">
-                    <h3>Документы</h3>
-                    <p>
-                        Если важно быстро понять доступность маршрута и ориентиры по срокам,
-                        оператор подскажет в чате по вашему направлению и типу отправления.
-                    </p>
-                </div>
-
-                <div class="card">
-                    <img src="/static/svgs/truck1.svg" alt="Маршрут">
-                    <h3>Проверка маршрута</h3>
-                    <p>
-                        Не нужно гадать, доступно ли направление. Напишите город отправления,
-                        точку назначения и тип отправления — оператор поможет с уточнением.
-                    </p>
-                </div>
-            </div>
-
-            <div class="premium-band">
-                <strong>Чтобы связаться с нами, нажмите кнопку «Написать оператору» — откроется живой чат Tawk прямо на сайте</strong>
-                <button class="js-open-chat" type="button">Написать оператору</button>
             </div>
         </section>
 
-        <section class="section" id="process">
-            <div class="section-head">
-                <div>
-                    <div class="eyebrow">Как это работает</div>
-                    <h2 class="section-title">Одна логика, один основной сценарий, быстрый контакт</h2>
-                </div>
+        <span id="about" class="hidden-anchor"></span>
+        <section class="compact-section">
+            <div class="dashboard">
+                <div class="block">
+                    <div class="section-kicker">О сервисе</div>
+                    <h2>Один экран, одна логика, один главный вход в диалог</h2>
+                    <div class="block-text">
+                        Мы специально ушли от перегруженной структуры и сделали сайт компактным.
+                        Вместо десятка одинаковых кнопок и длинных полотен текста — сильный первый экран,
+                        короткое объяснение, понятные преимущества и быстрый переход в чат с оператором.
+                    </div>
 
-                <div class="section-text">
-                    Мы специально упростили подачу. Вместо десятка конфликтующих кнопок —
-                    одна основная точка входа в диалог с оператором и стандартный виджет чата.
-                </div>
-            </div>
+                    <div class="features">
+                        <div class="feature">
+                            <div class="feature-top">
+                                <div class="feature-icon">📦</div>
+                                <h3>Разные типы отправлений</h3>
+                            </div>
+                            <p>Подходит для вещей, посылок, документов и других типов перевозки по европейским направлениям.</p>
+                        </div>
 
-            <div class="steps">
-                <div class="step">
-                    <div class="step-num">01</div>
-                    <h3>Нажимаете кнопку</h3>
-                    <p>
-                        Используйте кнопку «Написать оператору» — она открывает живой Tawk-чат прямо на сайте.
-                    </p>
-                </div>
+                        <div class="feature">
+                            <div class="feature-top">
+                                <div class="feature-icon">🧭</div>
+                                <h3>Уточнение маршрута</h3>
+                            </div>
+                            <p>Вы сразу пишете направление, а оператор помогает быстро сориентироваться по запросу.</p>
+                        </div>
 
-                <div class="step">
-                    <div class="step-num">02</div>
-                    <h3>Пишете детали</h3>
-                    <p>
-                        Укажите направление, тип отправления и если важны сроки — это ускорит ответ.
-                    </p>
-                </div>
+                        <div class="feature">
+                            <div class="feature-top">
+                                <div class="feature-icon">💬</div>
+                                <h3>Главная связь — чат</h3>
+                            </div>
+                            <p>Основной сценарий максимально простой: не искать долго по сайту, а сразу писать оператору.</p>
+                        </div>
 
-                <div class="step">
-                    <div class="step-num">03</div>
-                    <h3>Получаете уточнение</h3>
-                    <p>
-                        Оператор отвечает в чате и помогает с согласованием маршрута, деталей и доступности отправки.
-                    </p>
-                </div>
-            </div>
-
-            <div class="contact-panel" id="contacts">
-                <div>
-                    <h3>Контакты и связь</h3>
-                    <p>
-                        На данный момент все заказы и уточнения мы обрабатываем через оператора в онлайн-чате.
-                        Телефонные номера указаны ниже, но пока временно находятся на тех работах, поэтому
-                        для связи используйте кнопку «Написать оператору».
-                    </p>
-
-                    <div class="phones">
-                        <strong>Телефоны:</strong>
-                        <span>+7 (900) 000-00-00</span>
-                        <span>+7 (900) 111-11-11</span>
-                        <small>(временно на тех работах — заявки и все уточнения обрабатываются через оператора в чате)</small>
+                        <div class="feature">
+                            <div class="feature-top">
+                                <div class="feature-icon">⚡</div>
+                                <h3>Компактная подача</h3>
+                            </div>
+                            <p>Ничего лишнего: аккуратный интерфейс, понятная структура и чистая мобильная версия.</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="contact-actions">
-                    <button class="primary js-open-chat" type="button">Написать оператору</button>
-                    <a class="soft" href="https://t.me/cargodrive1" target="_blank" rel="noopener noreferrer">Telegram-канал</a>
+                <div class="block" id="how">
+                    <div class="section-kicker">Как это работает</div>
+                    <h2>Три коротких шага</h2>
+
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-num">01</div>
+                            <div>
+                                <h3>Открываете чат</h3>
+                                <p>Нажимаете любую кнопку «Написать оператору», и открывается живой Tawk-чат на сайте.</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-num">02</div>
+                            <div>
+                                <h3>Пишете детали</h3>
+                                <p>Указываете маршрут, тип отправления и если нужно — сроки или важные уточнения.</p>
+                            </div>
+                        </div>
+
+                        <div class="step">
+                            <div class="step-num">03</div>
+                            <div>
+                                <h3>Получаете ответ</h3>
+                                <p>Оператор помогает с уточнением направления, доступности и общей логики отправки.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cta-panel" id="contacts">
+                <div>
+                    <h3>Нужен маршрут или хотите быстро уточнить детали?</h3>
+                    <p>
+                        Самый быстрый способ связаться с нами — открыть онлайн-чат прямо на сайте.
+                        Для дополнительной связи и обновлений также доступен Telegram-канал CargoDrive.
+                    </p>
+                </div>
+
+                <div class="cta-actions">
+                    <button class="btn-primary js-open-chat" type="button">💬 Начать чат</button>
+                    <a class="btn-secondary" href="https://t.me/cargodrive1" target="_blank" rel="noopener noreferrer">Telegram-канал</a>
                 </div>
             </div>
         </section>
 
         <footer class="footer">
             <div class="footer-box">
-                <div class="footer-grid">
-                    <div>
-                        <h4>О CargoDrive</h4>
-                        <p>
-                            CargoDrive — это аккуратный и понятный формат связи для тех, кому нужно
-                            быстро согласовать перевозку из Европы. Мы сделали акцент на удобстве,
-                            чистом интерфейсе и живом контакте с оператором.
-                        </p>
-                    </div>
-
-                    <div>
-                        <h4>Навигация</h4>
-                        <ul>
-                            <li><a href="#home">Главная</a></li>
-                            <li><a href="#about">О сервисе</a></li>
-                            <li><a href="#services">Услуги</a></li>
-                            <li><a href="#process">Как это работает</a></li>
-                            <li><a href="#contacts">Контакты</a></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4>Информация</h4>
-                        <p>📍 Работаем по европейским направлениям</p>
-                        <p>📦 Вещи, посылки, документы и другие отправления</p>
-                        <p>💬 Основной способ связи — онлайн-чат на сайте</p>
-                    </div>
+                <div>
+                    <h4>О CargoDrive</h4>
+                    <p>
+                        CargoDrive — это аккуратный и современный формат связи для тех,
+                        кому нужно быстро согласовать перевозку по Европе без перегруженного интерфейса.
+                    </p>
                 </div>
 
-                <div class="footer-bottom">
-                    &copy; 2025 CargoDrive. Все права защищены.
+                <div>
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="#home">Главная</a></li>
+                        <li><a href="#about">О сервисе</a></li>
+                        <li><a href="#how">Как это работает</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4>Информация</h4>
+                    <p>📍 Работаем по европейским направлениям</p>
+                    <p>📦 Вещи, посылки, документы и другие отправления</p>
+                    <p>💬 Основной способ связи — онлайн-чат на сайте</p>
+
+                    <div class="footer-bottom">
+                        &copy; 2025 CargoDrive. Все права защищены.
+                    </div>
                 </div>
             </div>
         </footer>
